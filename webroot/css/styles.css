@@ -1,0 +1,25 @@
+body {
+    font-family: Lato, Arial, sans-serif;
+}
+
+/* Navbar */
+
+.navbar-default {
+    background-color: #222222;
+}
+.navbar-default .navbar-nav li a {
+    color: #EEEEEE;
+}
+.navbar-default .navbar-nav .active a {
+    background-color: #444444;
+    color: #EEEEEE;
+}
+.navbar-default .navbar-nav li a:hover {
+    color: #999999;
+}
+.navbar-default .navbar-brand {
+  color: tomato;
+}
+.content {
+    margin-top: 50px;
+}

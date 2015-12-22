@@ -1,0 +1,51 @@
+DROP DATABASE IF EXISTS Alderaan;
+
+CREATE DATABASE Alderaan;
+
+USE Alderaan;
+
+CREATE TABLE contacts (
+  id INT (12) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  firstname VARCHAR(100) NOT NULL,
+  lastname VARCHAR (100) NOT NULL,
+  email VARCHAR (250) NOT NULL,
+  phone VARCHAR (50) NOT NULL,
+  fax VARCHAR (50) NOT NULL
+) ENGINE=InnoDB;
+
+CREATE TABLE clients (
+  id INT (12) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  client_name VARCHAR (100) NOT NULL,
+  street VARCHAR (250) NOT NULL,
+  street_number VARCHAR (25) NOT NULL,
+  area_code VARCHAR (15) NOT NULL,
+  city VARCHAR (250) NOT NULL,
+  country VARCHAR (100) NOT NULL
+) ENGINE=InnoDB;
+
+CREATE TABLE projects(
+  id INT (12) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  client INT (12) UNSIGNED NOT NULL,
+  contact INT (12) UNSIGNED NOT NULL,
+  project_name VARCHAR (250) NOT NULL,
+  status VARCHAR (50) NOT NULL,
+  start_date DATE NOT NULL,
+  end_date DATE NOT NULL,
+  contract_amount DECIMAL (13, 2) NOT NULL,
+  internal_cost DECIMAL (13, 2) NOT NULL
+) ENGINE=InnoDB;
+
+
+ALTER TABLE projects
+ADD CONSTRAINT fk_projects_clients_client_id
+FOREIGN KEY (client)
+REFERENCES clients(id)
+ON UPDATE CASCADE
+ON DELETE CASCADE;
+
+ALTER TABLE projects
+ADD CONSTRAINT fk_projects_contacts_contact_id
+FOREIGN KEY (contact)
+REFERENCES contacts(id)
+ON UPDATE CASCADE
+ON DELETE CASCADE;
