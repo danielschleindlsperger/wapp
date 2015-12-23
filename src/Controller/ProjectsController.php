@@ -10,6 +10,8 @@ class ProjectsController extends AppController {
   // List projects
   public function index() {
 
+    $this->set('projects', $this->Projects->find('all'));
+
   }
 
   // Show details to specific project

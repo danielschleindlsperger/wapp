@@ -15,7 +15,6 @@
 use Cake\Routing\Router;
 
 $cakeDescription = 'WAPP';
-$baseURL = 'http://'.$_SERVER['SERVER_NAME'].Router::url('/');
 $link_dashboard = Router::url('/', true);
 $link_map = Router::url('/map', true);
 $link_clients = Router::url(array(
@@ -26,7 +25,12 @@ $link_projects = Router::url(array(
     'controller' => 'projects',
     'action' => 'index'
   ));
+
+$url = $this->request->here;
+
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -69,15 +73,15 @@ $link_projects = Router::url(array(
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
-          <li class="active"><a href="<?php echo $link_dashboard;?>">
+          <li <?php echo ($url == Router::url('/'))? 'class="active"' : ''?>><a href="<?php echo $link_dashboard;?>">
             <span class="glyphicon glyphicon-th-large" aria-hidden="true">
             </span>&nbsp;Dashboard<span class="sr-only">(current)</span>
           </a></li>
-          <li><a href="<?php echo $link_map;?>">
+          <li <?php echo ($url == Router::url('/map'))? 'class="active"' : ''?>><a href="<?php echo $link_map;?>">
             <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>&nbsp;Map</a></li>
-          <li><a href="<?php echo $link_clients;?>">
+          <li <?php echo ($url == $link_clients)? 'class="active"' : ''?>><a href="<?php echo $link_clients;?>">
             <span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;Customers</a></li>
-          <li><a href="<?php echo $link_projects;?>">
+          <li <?php echo ($url == $link_projects)? 'class="active"' : ''?>><a href="<?php echo $link_projects;?>">
             <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>&nbsp;Projects</a></li>
         </ul>
       </div><!-- /.navbar-collapse -->
@@ -85,7 +89,7 @@ $link_projects = Router::url(array(
   </nav>
     <?= $this->Flash->render() ?>
     <div class="content">
-        <?= $this->fetch('content');
+        <?= $this->fetch('content')
         ?>
     </div>
 </body>
