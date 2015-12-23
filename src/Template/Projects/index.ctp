@@ -19,6 +19,8 @@ use Cake\Error\Debugger;
 use Cake\Network\Exception\NotFoundException;
 use Cake\Routing\Router;
 
+$url = $this->request->here;
+
 $this->layout = false;
 
 if (!Configure::read('debug')):
@@ -33,7 +35,10 @@ $this->assign('title', 'Projects');
     'controller' => 'projects',
     'action' => 'create'
   )); ?>">Create new Project</a>
-<?php foreach ($projects as $project){
-  echo $project->project_name.'<br>';
-}
-?>
+
+<div class="list-group">
+  <?php foreach ($projects as $project){
+    echo '<a href="'.$url.'/'.urlencode($project->id).'"'.' class="list-group-item">'.$project->project_name.'</a>';
+  }
+  ?>
+</div>

@@ -42,9 +42,9 @@ $url = $this->request->here;
     </title>
     <?= $this->Html->meta('icon') ?>
 
+    <?= $this->Html->css('normalize.css') ?>
     <?= $this->Html->css('bootstrap.min.css') ?>
     <?= $this->Html->css('styles.css') ?>
-    <?= $this->Html->css('normalize.css') ?>
 
     <script type="text/javascript">var BaseUrl = '<?php echo Router::url('/', true); ?>';</script>
 

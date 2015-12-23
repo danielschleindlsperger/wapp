@@ -17,12 +17,9 @@ class ClientsController extends AppController {
   }
 
   // Show details to specific client
-  public function showDetails(){
+  public function showDetails($id=null){
 
-      $client_name = $this->request->pass;
-      $query = $clients->find()->where(['company_name' => $client_name]);
-      $client->company_name = 'Test Client';
-      $this->set('client', $query);
+      $this->set('client', $this->Clients->find()->where(['id' => $id])->first());
 
   }
 

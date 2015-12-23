@@ -15,10 +15,9 @@ class ProjectsController extends AppController {
   }
 
   // Show details to specific project
-  public function showDetails(){
+  public function showDetails($id = null){
 
-    $project->project_name = 'Test Project';
-    $this->set('project', $project);
+      $this->set('project', $this->Projects->find()->where(['id' => $id])->first());
 
   }
 

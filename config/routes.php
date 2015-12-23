@@ -63,15 +63,14 @@ Router::scope('/map', function ($routes) {
     $routes->fallbacks('DashedRoute');
 });
 
-Router::scope('/clients/:client_name', function ($routes) {
-
-    $routes->connect('/', ['controller' => 'Clients', 'action' => 'showdetails', 'showdetails'],
-      ['client_name' => '\d+', 'pass' => ['client_name']]
-    );
-
-    $routes->fallbacks('DashedRoute');
-});
-
+Router::connect('/clients/:id',
+    array('controller' => 'Clients', 'action' => 'showdetails'),
+    array('pass' => array('id')
+));
+Router::connect('/projects/:id',
+    array('controller' => 'Projects', 'action' => 'showdetails'),
+    array('pass' => array('id')
+));
 
 /**
  * Load all plugin routes.  See the Plugin documentation on

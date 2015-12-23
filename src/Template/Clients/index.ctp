@@ -37,7 +37,7 @@ $this->assign('title', 'Customers');
   )); ?>">Create new customer</a>
 <div class="list-group">
   <?php foreach ($clients as $client){
-    echo '<a href="'.$url.'/'.urlencode($client->client_name).'"'.' class="list-group-item">'.$client->client_name.'</a>';
+    echo '<a href="'.$url.'/'.urlencode($client->id).'"'.' class="list-group-item">'.$client->client_name.'</a>';
   }
   ?>
 </div>

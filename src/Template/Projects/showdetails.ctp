@@ -27,4 +27,4 @@ endif;
 <?php $this->extend('/Layout/default');
 $this->assign('title', $project->project_name);
 ?>
-<h1>Project Details</h1>
+<h1><?=$project->project_name?></h1>

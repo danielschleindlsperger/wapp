@@ -25,6 +25,6 @@ if (!Configure::read('debug')):
 endif;
 ?>
 <?php $this->extend('/Layout/default');
-$this->assign('title', $client->company_name);
+$this->assign('title', $client->client_name);
 ?>
-<h1>Company</h1>
+<h1><?=$client->client_name?></h1>
