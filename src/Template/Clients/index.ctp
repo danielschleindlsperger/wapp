@@ -17,6 +17,7 @@ use Cake\Core\Configure;
 use Cake\Datasource\ConnectionManager;
 use Cake\Error\Debugger;
 use Cake\Network\Exception\NotFoundException;
+use Cake\Routing\Router;
 
 $this->layout = false;
 
@@ -30,6 +31,10 @@ endif;
 $this->assign('title', 'Customers');
 ?>
 <h1>Customers</h1>
+<a class="btn btn-default" href="<?=Router::url(array(
+    'controller' => 'clients',
+    'action' => 'create'
+  )); ?>">Create new customer</a>
 <div class="list-group">
   <?php foreach ($clients as $client){
     echo '<a href="'.$url.'/'.urlencode($client->client_name).'"'.' class="list-group-item">'.$client->client_name.'</a>';

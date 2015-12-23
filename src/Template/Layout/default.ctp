@@ -44,8 +44,9 @@ $url = $this->request->here;
 
     <?= $this->Html->css('bootstrap.min.css') ?>
     <?= $this->Html->css('styles.css') ?>
+    <?= $this->Html->css('normalize.css') ?>
 
-
+    <script type="text/javascript">var BaseUrl = '<?php echo Router::url('/', true); ?>';</script>
 
     <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
     <?= $this->fetch('script') ?>
@@ -87,7 +88,7 @@ $url = $this->request->here;
     </div><!-- /.container-fluid -->
   </nav>
     <?= $this->Flash->render() ?>
-    <div class="content">
+    <div class="content container">
         <?=
         $this->fetch('content');
         ?>
@@ -95,6 +96,6 @@ $url = $this->request->here;
 
   <?= $this->Html->script('jquery-2.1.4.min.js') ?>
   <?= $this->Html->script('bootstrap.min.js') ?>
-  <?= $this->fetch('maps') ?>
+  <?= $this->fetch('more_js') ?>
 </body>
 </html>

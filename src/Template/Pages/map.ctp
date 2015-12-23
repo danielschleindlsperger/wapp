@@ -28,10 +28,10 @@ endif;
 $this->assign('title', 'Home');
 ?>
 <?php
-  $this->start('maps');
+  $this->start('more_js');
  ?>
  <div id="map"></div>
  <?= $this->Html->script('wmap.js') ?>
  <?= $this->Html->script('https://maps.googleapis.com/maps/api/js?callback=initMap') ?>
 <?php
-  $this->end('maps')?>
+  $this->end('more_js')?>

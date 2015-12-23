@@ -17,6 +17,7 @@ use Cake\Core\Configure;
 use Cake\Datasource\ConnectionManager;
 use Cake\Error\Debugger;
 use Cake\Network\Exception\NotFoundException;
+use Cake\Routing\Router;
 
 $this->layout = false;
 
@@ -28,6 +29,10 @@ endif;
 $this->assign('title', 'Projects');
 ?>
 <h1>Projects</h1>
+<a class="btn btn-default" href="<?=Router::url(array(
+    'controller' => 'projects',
+    'action' => 'create'
+  )); ?>">Create new Project</a>
 <?php foreach ($projects as $project){
   echo $project->project_name.'<br>';
 }

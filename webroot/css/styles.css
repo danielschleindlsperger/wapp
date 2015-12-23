@@ -20,12 +20,36 @@ html, body {
 .navbar-default .navbar-nav li a:hover {
     color: #999999;
 }
+.navbar-default .navbar-nav > .active > a:hover{
+    background-color: #444444;
+    color: #000000;
+}
 .navbar-default .navbar-brand {
-  color: tomato;
+    color: tomato;
 }
 .content {
     margin-top: 50px;
 }
 #map {
-  height: 100%;
+    height: 100%;
+}
+h3 {
+    margin: 0;
+    text-align: center;
+}
+
+/* Input glow */
+
+.form-control:focus {
+    border-color: #999999;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(200, 200, 200, 0.6);
+}
+
+
+/* Buttons */
+.btn-default {
+  width:100%;
+}
+.btn-default:active{
+  box-shadow: tomato;
 }
