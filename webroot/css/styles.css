@@ -1,5 +1,8 @@
-body {
+html, body {
     font-family: Lato, Arial, sans-serif;
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 /* Navbar */
@@ -22,4 +25,10 @@ body {
 }
 .content {
     margin-top: 50px;
+}
+#map {
+  height: 100%;
+}
+#content {
+  height: 100%;
 }

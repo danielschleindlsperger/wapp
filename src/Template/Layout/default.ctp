@@ -45,8 +45,7 @@ $url = $this->request->here;
     <?= $this->Html->css('bootstrap.min.css') ?>
     <?= $this->Html->css('styles.css') ?>
 
-    <?= $this->Html->script('jquery-2.1.4.min.js') ?>
-    <?= $this->Html->script('bootstrap.min.js') ?>
+
 
     <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
     <?= $this->fetch('script') ?>
@@ -88,9 +87,14 @@ $url = $this->request->here;
     </div><!-- /.container-fluid -->
   </nav>
     <?= $this->Flash->render() ?>
-    <div class="content">
-        <?= $this->fetch('content')
+    <div class="content" id="content">
+        <?=
+        $this->fetch('content');
         ?>
     </div>
+
+  <?= $this->Html->script('jquery-2.1.4.min.js') ?>
+  <?= $this->Html->script('bootstrap.min.js') ?>
+  <?= $this->fetch('maps') ?>
 </body>
 </html>
