@@ -25,7 +25,7 @@ if (!Configure::read('debug')):
 endif;
 ?>
 <?php $this->extend('/Layout/default');
-$this->assign('title', 'Home');
+$this->assign('title', 'Delete Customer');
 ?>
 <h1>Clients</h1>
 <?php foreach ($clients as $client){

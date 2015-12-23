@@ -55,17 +55,23 @@ Router::scope('/', function ($routes) {
 });
 
 Router::scope('/map', function ($routes) {
-    /**
-     * Here, we are connecting '/' (base path) to a controller called 'Pages',
-     * its action called 'display', and we pass a param to select the view file
-     * to use (in this case, src/Template/Pages/home.ctp)...
-     */
+
     $routes->connect('/', ['controller' => 'Pages', 'action' => 'display', 'map']);
 
     $routes->connect('/pages/*', ['controller' => 'Pages', 'action' => 'display']);
 
     $routes->fallbacks('DashedRoute');
 });
+
+Router::scope('/clients/:client_name', function ($routes) {
+
+    $routes->connect('/', ['controller' => 'Clients', 'action' => 'showdetails', 'showdetails'],
+      ['client_name' => '\d+', 'pass' => ['client_name']]
+    );
+
+    $routes->fallbacks('DashedRoute');
+});
+
 
 /**
  * Load all plugin routes.  See the Plugin documentation on

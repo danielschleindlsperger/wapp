@@ -87,7 +87,7 @@ $url = $this->request->here;
     </div><!-- /.container-fluid -->
   </nav>
     <?= $this->Flash->render() ?>
-    <div class="content" id="content">
+    <div class="content">
         <?=
         $this->fetch('content');
         ?>

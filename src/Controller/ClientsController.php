@@ -13,11 +13,16 @@ class ClientsController extends AppController {
   public function index() {
 
     $this->set('clients', $this->Clients->find('all'));
-    
+
   }
 
   // Show details to specific client
   public function showDetails(){
+
+      $client_name = $this->request->pass;
+      $query = $clients->find()->where(['company_name' => $client_name]);
+      $client->company_name = 'Test Client';
+      $this->set('client', $query);
 
   }
 

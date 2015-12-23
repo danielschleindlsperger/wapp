@@ -25,7 +25,7 @@ if (!Configure::read('debug')):
 endif;
 ?>
 <?php $this->extend('/Layout/default');
-$this->assign('title', 'Projects');
+$this->assign('title', 'Delete Project');
 ?>
 <h1>Projects</h1>
 <?php foreach ($projects as $project){

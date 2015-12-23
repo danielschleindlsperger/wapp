@@ -27,12 +27,11 @@ endif;
 <?php $this->extend('/Layout/default');
 $this->assign('title', 'Home');
 ?>
-<h1>Map</h1>
-<div id="map"></div>
 <?php
   $this->start('maps');
  ?>
+ <div id="map"></div>
  <?= $this->Html->script('wmap.js') ?>
  <?= $this->Html->script('https://maps.googleapis.com/maps/api/js?callback=initMap') ?>
 <?php
-  $this->end('maps')?>;
+  $this->end('maps')?>

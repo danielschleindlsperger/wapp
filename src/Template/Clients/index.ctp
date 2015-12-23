@@ -20,15 +20,19 @@ use Cake\Network\Exception\NotFoundException;
 
 $this->layout = false;
 
+$url = $this->request->here;
+
 if (!Configure::read('debug')):
     throw new NotFoundException();
 endif;
 ?>
 <?php $this->extend('/Layout/default');
-$this->assign('title', 'Home');
+$this->assign('title', 'Customers');
 ?>
-<h1>Clients</h1>
-<?php foreach ($clients as $client){
-  echo $client->client_name.'<br>';
-}
-?>
+<h1>Customers</h1>
+<div class="list-group">
+  <?php foreach ($clients as $client){
+    echo '<a href="'.$url.'/'.urlencode($client->client_name).'"'.' class="list-group-item">'.$client->client_name.'</a>';
+  }
+  ?>
+</div>

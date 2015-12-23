@@ -25,10 +25,6 @@ if (!Configure::read('debug')):
 endif;
 ?>
 <?php $this->extend('/Layout/default');
-$this->assign('title', 'Home');
+$this->assign('title', $client->company_name);
 ?>
-<h1>Clients</h1>
-<?php foreach ($clients as $client){
-  echo $client->client_name.'<br>';
-}
-?>
+<h1>Company</h1>

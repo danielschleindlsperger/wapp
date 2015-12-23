@@ -17,6 +17,9 @@ class ProjectsController extends AppController {
   // Show details to specific project
   public function showDetails(){
 
+    $project->project_name = 'Test Project';
+    $this->set('project', $project);
+
   }
 
   // Edit project
