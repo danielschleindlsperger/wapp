@@ -37,8 +37,11 @@ $this->assign('title', 'Create Project');
       <div class="form-group">
         <label for="company_name">company name</label>
         <select class="form-control" id="company_name">
-          <option>Company 1 </option>
-          <option>Company 2 </option>
+          <?php
+            foreach($clients as $client){
+              echo '<option data-id="'.$client->id.'">'.$client->client_name.'</option>';
+            }
+          ?>
         </select>
       </div>
     </form>

@@ -29,6 +29,9 @@ class ProjectsController extends AppController {
   // Create new project
   public function create(){
 
+    $this->loadModel('Clients');
+    $this->set('clients', $this->Clients->find('all'));
+
   }
 
   // Delete existing project

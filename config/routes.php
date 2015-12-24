@@ -71,6 +71,12 @@ Router::connect('/projects/:id',
     array('controller' => 'Projects', 'action' => 'showdetails'),
     array('pass' => array('id')
 ));
+Router::connect('/projects/create',
+    array('controller' => 'Projects', 'action' => 'create')
+);
+Router::connect('/clients/create',
+    array('controller' => 'Clients', 'action' => 'create')
+);
 
 /**
  * Load all plugin routes.  See the Plugin documentation on
