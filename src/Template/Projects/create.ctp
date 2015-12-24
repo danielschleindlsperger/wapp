@@ -30,7 +30,7 @@ $this->assign('title', 'Create Project');
   <h1>Create new project</h1>
 
   <div class="col-sm-12 col-md-3">
-    <h3 class="create-heading">Company</h3>
+    <h3>Company</h3>
   </div>
   <div class="col-sm-12 col-md-9">
     <form class="form-horizontal">
@@ -48,7 +48,7 @@ $this->assign('title', 'Create Project');
   </div>
 
   <div class="col-sm-12 col-md-3">
-    <h3 class="create-heading">Project</h3>
+    <h3>Project</h3>
   </div>
   <div class="col-sm-12 col-md-9">
     <form class="form-horizontal">
@@ -74,7 +74,7 @@ $this->assign('title', 'Create Project');
   </div>
 
   <div class="col-sm-12 col-md-3">
-    <h3 class="create-heading">Dates</h3>
+    <h3>Dates</h3>
   </div>
   <div class="col-sm-12 col-md-9">
     <form class="form-horizontal">
@@ -94,7 +94,7 @@ $this->assign('title', 'Create Project');
   </div>
 
   <div class="col-sm-12 col-md-3">
-    <h3 class="create-heading">Pricing</h3>
+    <h3>Pricing</h3>
   </div>
   <div class="col-sm-12 col-md-9">
     <form class="form-horizontal">
@@ -114,7 +114,7 @@ $this->assign('title', 'Create Project');
   </div>
 
   <div class="col-sm-12 col-md-3">
-    <h3 class="create-heading">Contact Person</h3>
+    <h3>Contact Person</h3>
   </div>
   <div class="col-sm-12 col-md-9">
     <form class="form-horizontal">

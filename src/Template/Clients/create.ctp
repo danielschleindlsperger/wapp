@@ -30,7 +30,7 @@ $this->assign('title', 'Create Customer');
   <h1>Create new customer</h1>
 
     <div class="col-sm-12 col-md-3">
-      <h3 class="create-heading">Company</h3>
+      <h3>Company</h3>
     </div>
     <div class="col-sm-12 col-md-9">
       <form class="form-horizontal">
@@ -42,7 +42,7 @@ $this->assign('title', 'Create Customer');
     </div>
 
     <div class="col-sm-12 col-md-3">
-      <h3 class="create-heading">Adress</h3>
+      <h3>Adress</h3>
     </div>
     <div class="col-sm-12 col-md-9">
       <form class="form-horizontal">
@@ -86,7 +86,7 @@ $this->assign('title', 'Create Customer');
     </div>
 
     <div class="col-sm-12 col-md-3">
-      <h3 class="create-heading">Contact person</h3>
+      <h3>Contact person</h3>
     </div>
     <div class="col-sm-12 col-md-9">
       <form class="form-horizontal">

@@ -41,7 +41,7 @@ $this->assign('title', $data['project_name']);
 
 <div class="row">
   <div class="col-sm-12 col-md-3">
-    <h3 class="create-heading">Timeframe</h3>
+    <h3>Timeframe</h3>
   </div>
   <div class="col-sm-12 col-md-9">
     <?= $data['start_date'].' - '.$data['end_date'] ?>
@@ -50,7 +50,7 @@ $this->assign('title', $data['project_name']);
 
 <div class="row">
   <div class="col-sm-12 col-md-3">
-    <h3 class="create-heading">Profit</h3>
+    <h3>Accounting</h3>
   </div>
   <div class="col-sm-12 col-md-9">
     <table class="table">
@@ -72,7 +72,7 @@ $this->assign('title', $data['project_name']);
 
 <div class="row">
   <div class="col-sm-12 col-md-3">
-    <h3 class="create-heading">Contact</h3>
+    <h3>Contact</h3>
   </div>
   <div class="col-sm-12 col-md-9">
     <h4>
