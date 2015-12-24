@@ -33,10 +33,6 @@ html, body {
 #map {
     height: 100%;
 }
-h3 {
-    margin: 0;
-    text-align: center;
-}
 
 /* Input glow */
 
@@ -47,9 +43,7 @@ h3 {
 
 
 /* Buttons */
-.btn-default {
-  width:100%;
-}
+
 .btn-default:active{
   box-shadow: tomato;
 }

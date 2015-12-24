@@ -79,7 +79,7 @@ $this->assign('title', 'Create Project');
   <div class="col-sm-12 col-md-9">
     <form class="form-horizontal">
       <div class="form-group">
-        <label for="start_date">start date (YYYY-MM-DD)</label>
+        <label for="start_date">start date</label>
         <input type="date" class="form-control" id="start_date">
       </div>
     </form>
@@ -87,7 +87,7 @@ $this->assign('title', 'Create Project');
   <div class="col-sm-12 col-md-9 col-md-offset-3">
     <form class="form-horizontal">
       <div class="form-group">
-        <label for="end_date">end date (YYYY-MM-DD)</label>
+        <label for="end_date">end date</label>
         <input type="date" class="form-control" id="end_date">
       </div>
     </form>
