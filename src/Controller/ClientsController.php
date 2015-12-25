@@ -22,24 +22,25 @@ class ClientsController extends AppController {
           $this->loadModel('Projects');
           $this->loadModel('Contacts');
 
-          $clients = $this->Clients->find()->where(['id' => $id])->first();
+          $client = $this->Clients->find()->where(['id' => $id])->first();
           $projects = $this->Projects->find()->where(['client' => $id]);
-
+          $contact_id = $client->contact;
           $contact = $this->Contacts->find()->where(['id' => $contact_id])->first();
 
-          
+
           $data = [
-            'project_name' => $project->project_name,
-            'project_id' => $project->id,
             'client_name' => $client->client_name,
+            'street' => $client->street,
+            'street_number' => $client->street_number,
+            'postal_code' => $client->area_code,
+            'city' => $client->city,
+            'country' => $client->country,
+            'projects' => $projects,
             'contact_firstname' => $contact->firstname,
             'contact_lastname' => $contact->lastname,
             'contact_phone' => $contact->phone,
             'contact_email' => $contact->email,
-            'contract_amount' => $project->contract_amount,
-            'internal_cost' => $project->internal_cost,
-            'start_date' => $project->start_date,
-            'end_date' => $project->end_date
+            'contact_fax' => $contact->fax
           ];
           $this->set('data', $data);
 

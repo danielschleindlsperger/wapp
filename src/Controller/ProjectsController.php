@@ -22,10 +22,10 @@ class ProjectsController extends AppController {
 
       $project = $this->Projects->find()->where(['id' => $id])->first();
       $client_id = $project->client;
-      $contact_id = $project->contact;
       $client = $this->Clients->find()->where(['id' => $client_id])->first();
-
+      $contact_id = $client->contact;
       $contact = $this->Contacts->find()->where(['id' => $contact_id])->first();
+
       $data = [
         'project_name' => $project->project_name,
         'project_id' => $project->id,
@@ -34,6 +34,7 @@ class ProjectsController extends AppController {
         'contact_lastname' => $contact->lastname,
         'contact_phone' => $contact->phone,
         'contact_email' => $contact->email,
+        'contact_fax' => $contact->fax,
         'contract_amount' => $project->contract_amount,
         'internal_cost' => $project->internal_cost,
         'start_date' => $project->start_date,

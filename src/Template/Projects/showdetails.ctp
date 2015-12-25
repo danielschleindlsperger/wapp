@@ -82,5 +82,7 @@ $this->assign('title', $data['project_name']);
     Phone number: <?= $data['contact_phone'].'<br>' ?>
     Email:
     <a href="mailto:<?=$data['contact_email']?>" target="_top"><?=$data['contact_email']?></a>
+    <br>
+    Fax: <?= $data['contact_fax'] ?>
   </div>
 </div>
