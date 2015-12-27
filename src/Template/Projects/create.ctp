@@ -92,18 +92,18 @@ $this->assign('title', 'Create Project');
   </div>
 
   <div class="col-sm-12 col-md-3">
-    <h3>Pricing</h3>
+    <h3>Accounting</h3>
   </div>
   <div class="col-sm-12 col-md-9">
     <div class="form-group">
       <label for="contract_amound">contract amount</label>
-      <input type="text" class="form-control" id="contract_amount" name="contract_amount">
+      <input type="number" step="0.01" class="form-control" id="contract_amount" name="contract_amount">
     </div>
   </div>
   <div class="col-sm-12 col-md-9 col-md-offset-3">
     <div class="form-group">
       <label for="internal_costs">internal costs</label>
-      <input type="text" class="form-control" id="internal_costs" name="internal_cost">
+      <input type="number" step="0.01" class="form-control" id="internal_costs" name="internal_cost">
     </div>
   </div>
 
