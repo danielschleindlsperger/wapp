@@ -24,8 +24,8 @@ class ClientsController extends AppController
       $this->loadModel('Contacts');
 
       $client = $this->Clients->find()->where(['id' => $id])->first();
-      $projects = $this->Projects->find()->where(['client' => $id]);
-      $contact_id = $client->contact;
+      $projects = $this->Projects->find()->where(['client_id' => $id]);
+      $contact_id = $client->contact_id;
       $contact = $this->Contacts->find()->where(['id' => $contact_id])->first();
 
       $data = [
@@ -36,8 +36,8 @@ class ClientsController extends AppController
             'city' => $client->city,
             'country' => $client->country,
             'projects' => $projects,
-            'contact_firstname' => $contact->firstname,
-            'contact_lastname' => $contact->lastname,
+            'contact_firstname' => $contact->first_name,
+            'contact_lastname' => $contact->last_name,
             'contact_phone' => $contact->phone,
             'contact_email' => $contact->email,
             'contact_fax' => $contact->fax,
@@ -53,36 +53,49 @@ class ClientsController extends AppController
   // Create new client
   public function create()
   {
+      // FIXME
       $this->loadModel('Contacts');
-      $contact = $this->Contacts->newEntity();
       if ($this->request->is('post')) {
+          $contact = $this->Contacts->newEntity();
           $data = $this->request->data;
           $contact_data = array(
-          'firstname' => $data['firstname'],
-          'lastname' => $data['lastname'],
+          'first_name' => $data['firstname'],
+          'last_name' => $data['lastname'],
           'email' => $data['email'],
           'phone' => $data['phone'],
           'fax' => $data['fax'],
         );
-
           $contact = $this->Contacts->patchEntity($contact, $contact_data);
           if ($this->Contacts->save($contact)) {
+                  $id = $contact->id;
+                  $this->Flash->success('The contact has been saved. ID: '.$id, ['id' => $id]);
 
-            // $client_data = array(
+                  return $this->redirect(['action' => 'index']);
+
+
+            //
+            //   $client_data = array(
             // 'client_name' => $data['client_name'],
             // 'street' => $data['street'],
             // 'street_number' => $data['street_number'],
             // 'area_code' => $data['area_code'],
             // 'city' => $data['city'],
             // 'country' => $data['country'],
-            //);
-
-              //$this->Flash->success(__('Contact has been saved.', ['id' => $contact->id]));
-              $this->Flash->success('The contact has been saved', ['id' => $contact->id]);
-
-              return $this->redirect(['action' => 'index']);
+            // 'contact_id' => $contact,
+            // );
+            //
+            //   $client = $this->Clients->newEntity($client_data, [
+            //     'associated' => ['Contacts'],
+            //   ]);
+            //   if ($this->Clients->save($client)) {
+            //       $this->Flash->success('The contact has been saved', ['id' => $id]);
+            //
+            //       return $this->redirect(['action' => 'index']);
+            //   }
+            //   $this->Flash->error(__('Unable to add company.'));
           }
-          $this->Flash->error(__('Unable to add contact.'));
+          $errors = $contact->errors();
+          $this->Flash->error('Unable to add contact: '.debug($errors));
       }
   }
 

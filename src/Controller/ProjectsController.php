@@ -21,17 +21,17 @@ class ProjectsController extends AppController {
       $this->loadModel('Contacts');
 
       $project = $this->Projects->find()->where(['id' => $id])->first();
-      $client_id = $project->client;
+      $client_id = $project->client_id;
       $client = $this->Clients->find()->where(['id' => $client_id])->first();
-      $contact_id = $client->contact;
+      $contact_id = $client->contact_id;
       $contact = $this->Contacts->find()->where(['id' => $contact_id])->first();
 
       $data = [
         'project_name' => $project->project_name,
-        'project_id' => $project->id,
+        'project_id' => $project->project_id,
         'client_name' => $client->client_name,
-        'contact_firstname' => $contact->firstname,
-        'contact_lastname' => $contact->lastname,
+        'contact_firstname' => $contact->first_name,
+        'contact_lastname' => $contact->last_name,
         'contact_phone' => $contact->phone,
         'contact_email' => $contact->email,
         'contact_fax' => $contact->fax,

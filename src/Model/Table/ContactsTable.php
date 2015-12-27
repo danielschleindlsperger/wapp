@@ -7,13 +7,17 @@ use Cake\Validation\Validator;
 
 class ContactsTable extends Table
 {
+    public function initialize(array $config)
+    {
+    }
+
     public function validationDefault(Validator $validator)
     {
         return $validator
-            ->requirePresence('firstname')
-            ->notEmpty('firstname', 'A first name is required')
-            ->requirePresence('lastname')
-            ->notEmpty('lastname', 'An last name is required')
+            ->requirePresence('first_name')
+            ->notEmpty('first_name', 'A first name is required')
+            ->requirePresence('last_name')
+            ->notEmpty('last_name', 'A last name is required')
             ->requirePresence('email')
             ->notEmpty('email', 'An email adress is required')
             ->requirePresence('fax')

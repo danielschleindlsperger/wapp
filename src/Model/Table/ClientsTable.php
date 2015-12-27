@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Model\Table;
 
 use Cake\ORM\Table;
@@ -6,6 +7,10 @@ use Cake\Validation\Validator;
 
 class ClientsTable extends Table
 {
+    public function initialize(array $config)
+    {
+        $this->hasOne('Contacts');
+    }
 
     public function validationDefault(Validator $validator)
     {
@@ -16,7 +21,7 @@ class ClientsTable extends Table
             ->notEmpty('area_code', 'An area code is required')
             ->add('area_code', 'numeric', [
                 'rule' => 'numeric',
-                'message' => 'Area code has to be a numeric value'
+                'message' => 'Area code has to be a numeric value',
             ])
             ->requirePresence('city')
             ->notEmpty('city', 'A city is required')
@@ -28,8 +33,7 @@ class ClientsTable extends Table
             ->notEmpty('street_number', 'A street number is required')
             ->add('street_number', 'numeric', [
                 'rule' => 'numeric',
-                'message' => 'Street number has to be a numeric value'
+                'message' => 'Street number has to be a numeric value',
             ]);
     }
-
 }

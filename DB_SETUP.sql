@@ -6,8 +6,8 @@ USE Alderaan;
 
 CREATE TABLE contacts (
   id INT (12) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-  firstname VARCHAR(100) NOT NULL,
-  lastname VARCHAR (100) NOT NULL,
+  first_name VARCHAR(100) NOT NULL,
+  last_name VARCHAR (100) NOT NULL,
   email VARCHAR (250) NOT NULL,
   phone VARCHAR (50) NOT NULL,
   fax VARCHAR (50) NOT NULL
@@ -21,12 +21,12 @@ CREATE TABLE clients (
   area_code VARCHAR (15) NOT NULL,
   city VARCHAR (250) NOT NULL,
   country VARCHAR (100) NOT NULL,
-  contact INT (12) UNSIGNED NOT NULL
+  contact_id INT (12) UNSIGNED NOT NULL
 ) ENGINE=InnoDB;
 
 CREATE TABLE projects(
   id INT (12) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-  client INT (12) UNSIGNED NOT NULL,
+  client_id INT (12) UNSIGNED NOT NULL,
   project_name VARCHAR (250) NOT NULL,
   status VARCHAR (50) NOT NULL,
   start_date DATE NOT NULL,
@@ -37,15 +37,15 @@ CREATE TABLE projects(
 
 
 ALTER TABLE projects
-ADD CONSTRAINT fk_projects_clients_client_id
-FOREIGN KEY (client)
+ADD CONSTRAINT fk_projects_clients
+FOREIGN KEY (client_id)
 REFERENCES clients(id)
 ON UPDATE CASCADE
 ON DELETE CASCADE;
 
 ALTER TABLE clients
-ADD CONSTRAINT fk_clients_contacts_contact_id
-FOREIGN KEY (contact)
+ADD CONSTRAINT fk_clients_contacts
+FOREIGN KEY (contact_id)
 REFERENCES contacts(id)
 ON UPDATE CASCADE
 ON DELETE CASCADE;
