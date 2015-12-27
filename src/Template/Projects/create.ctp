@@ -17,8 +17,14 @@ use Cake\Core\Configure;
 use Cake\Datasource\ConnectionManager;
 use Cake\Error\Debugger;
 use Cake\Network\Exception\NotFoundException;
+use Cake\Routing\Router;
 
 $this->layout = false;
+
+$url = Router::url(array(
+    'controller' => 'projects',
+    'action' => 'create',
+  ), true);
 
 if (!Configure::read('debug')):
     throw new NotFoundException();
@@ -28,7 +34,8 @@ endif;
 $this->assign('title', 'Create Project');
 ?>
   <h1>Create new project</h1>
-<form class="form-horizontal">
+  <?= $this->Flash->render() ?>
+  <form class="form-horizontal" action="<?=$url?>" method="post">
   <div class="col-sm-12 col-md-3">
     <h3>Company</h3>
   </div>
@@ -80,7 +87,7 @@ $this->assign('title', 'Create Project');
   <div class="col-sm-12 col-md-9 col-md-offset-3">
     <div class="form-group">
       <label for="end_date">end date</label>
-      <input type="date" class="form-control" id="end_date" name="start_date">
+      <input type="date" class="form-control" id="end_date" name="end_date">
     </div>
   </div>
 

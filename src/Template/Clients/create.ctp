@@ -14,9 +14,12 @@
  *
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
-use Cake\Core\Configure;
-use Cake\Network\Exception\NotFoundException;
-use Cake\Routing\Router;
+ use Cake\Cache\Cache;
+ use Cake\Core\Configure;
+ use Cake\Datasource\ConnectionManager;
+ use Cake\Error\Debugger;
+ use Cake\Network\Exception\NotFoundException;
+ use Cake\Routing\Router;
 
 $url = Router::url(array(
     'controller' => 'clients',

@@ -1,22 +1,20 @@
 <?php
+
 namespace App\Controller;
 
-use Cake\Core\Configure;
-use Cake\Network\Exception\NotFoundException;
-use Cake\View\Exception\MissingTemplateException;
+use Cake\I18n\Time;
 
-class ProjectsController extends AppController {
-
-  // List projects
-  public function index() {
-
-    $this->set('projects', $this->Projects->find('all'));
-
+class ProjectsController extends AppController
+{
+    // List projects
+  public function index()
+  {
+      $this->set('projects', $this->Projects->find('all'));
   }
 
   // Show details to specific project
-  public function showDetails($id = null){
-
+  public function showDetails($id = null)
+  {
       $this->loadModel('Clients');
       $this->loadModel('Contacts');
 
@@ -38,27 +36,55 @@ class ProjectsController extends AppController {
         'contract_amount' => $project->contract_amount,
         'internal_cost' => $project->internal_cost,
         'start_date' => $project->start_date,
-        'end_date' => $project->end_date
+        'end_date' => $project->end_date,
       ];
       $this->set('data', $data);
-
   }
 
   // Edit project
-  public function edit(){
-
+  public function edit()
+  {
   }
 
   // Create new project
-  public function create(){
+  public function create()
+  {
+      $this->loadModel('Clients');
+      if ($this->request->is('post')) {
+          $project = $this->Projects->newEntity([
+          'associated' => ['Projects'],
+        ]);
 
-    $this->loadModel('Clients');
-    $this->set('clients', $this->Clients->find('all'));
+          $data = $this->request->data;
 
+          $client = $this->Clients->find()->where(['client_name' => $data['client_name']])->first();
+          $client_id = $client->id;
+
+          $project_data = array(
+          'project_name' => $data['project_name'],
+          'client_id' => $client_id,
+          'status' => $data['status'],
+          'start_date' => new Time($data['start_date']),
+          'end_date' => new Time($data['end_date']),
+          'contract_amount' => $data['contract_amount'],
+          'internal_cost' => $data['internal_cost'],
+          );
+          $project = $this->Projects->patchEntity($project, $project_data);
+          $project->client_id = $client_id;
+
+          if ($this->Projects->save($project)) {
+              $this->Flash->success('The project has been saved.');
+
+              return $this->redirect(['action' => 'index']);
+          }
+          $errors = $project->errors();
+          $this->Flash->error(__('Unable to add project.'.debug($errors).debug($project_data['start_date'])));
+      }
+      $this->set('clients', $this->Clients->find('all'));
   }
 
   // Delete existing project
-  public function delete(){
-
+  public function delete()
+  {
   }
 }

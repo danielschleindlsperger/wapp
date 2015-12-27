@@ -44,7 +44,7 @@ $this->assign('title', $data['project_name']);
     <h3>Timeframe</h3>
   </div>
   <div class="col-sm-12 col-md-9">
-    <?= $data['start_date'].' - '.$data['end_date'] ?>
+    <?= $this->Time->format($data['start_date'], 'd.M.Y').' - '.$this->Time->format($data['end_date'], 'd.M.Y') ?>
   </div>
 </div>
 

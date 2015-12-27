@@ -53,7 +53,7 @@ $this->assign('title', $data['client_name']);
   </div>
 </div>
 <div class="row">
-  <h1>Projects</h1>
+  <h2>Projects</h2>
   <div class="list-group">
     <?php foreach ($data['projects'] as $project){
       echo '<a href="'.Router::url(array("controller" => "projects","action" => "showdetails", $project->id), true).'"'.' class="list-group-item" ><span class="project-list-title">'.
