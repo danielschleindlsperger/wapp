@@ -33,18 +33,16 @@ $this->assign('title', 'Create Project');
     <h3>Company</h3>
   </div>
   <div class="col-sm-12 col-md-9">
-
-      <div class="form-group">
-        <label for="company_name">company name</label>
-        <select class="form-control" id="company_name">
-          <?php
-            foreach($clients as $client){
-              echo '<option data-id="'.$client->id.'">'.$client->client_name.'</option>';
-            }
-          ?>
-        </select>
-      </div>
-
+    <div class="form-group">
+      <label for="company_name">company name</label>
+      <select class="form-control" id="company_name" name="client_name">
+        <?php
+          foreach($clients as $client){
+            echo '<option data-id="'.$client->id.'">'.$client->client_name.'</option>';
+          }
+        ?>
+      </select>
+    </div>
   </div>
 
   <div class="col-sm-12 col-md-3">
@@ -54,13 +52,13 @@ $this->assign('title', 'Create Project');
     <form class="form-horizontal">
       <div class="form-group">
         <label for="project_name">project name</label>
-        <input type="text" class="form-control" id="project_name">
+        <input type="text" class="form-control" id="project_name" name="project_name">
       </div>
   </div>
   <div class="col-sm-12 col-md-9 col-md-offset-3">
     <div class="form-group">
       <label for="project_status">project status</label>
-      <select class="form-control" id="project_status">
+      <select class="form-control" id="project_status" name="status">
         <option>planned</option>
         <option>began</option>
         <option>stopped</option>
@@ -76,13 +74,13 @@ $this->assign('title', 'Create Project');
   <div class="col-sm-12 col-md-9">
     <div class="form-group">
       <label for="start_date">start date</label>
-      <input type="date" class="form-control" id="start_date">
+      <input type="date" class="form-control" id="start_date" name="start_date">
     </div>
   </div>
   <div class="col-sm-12 col-md-9 col-md-offset-3">
     <div class="form-group">
       <label for="end_date">end date</label>
-      <input type="date" class="form-control" id="end_date">
+      <input type="date" class="form-control" id="end_date" name="start_date">
     </div>
   </div>
 
@@ -92,47 +90,13 @@ $this->assign('title', 'Create Project');
   <div class="col-sm-12 col-md-9">
     <div class="form-group">
       <label for="contract_amound">contract amount</label>
-      <input type="text" class="form-control" id="contract_amount">
+      <input type="text" class="form-control" id="contract_amount" name="contract_amount">
     </div>
   </div>
   <div class="col-sm-12 col-md-9 col-md-offset-3">
     <div class="form-group">
       <label for="internal_costs">internal costs</label>
-      <input type="text" class="form-control" id="internal_costs">
-    </div>
-  </div>
-
-  <div class="col-sm-12 col-md-3">
-    <h3>Contact Person</h3>
-  </div>
-  <div class="col-sm-12 col-md-9">
-    <div class="form-group">
-      <label for="first_name">first name</label>
-      <input type="text" class="form-control" id="first_name">
-    </div>
-  </div>
-  <div class="col-sm-12 col-md-9 col-md-offset-3">
-    <div class="form-group">
-      <label for="last_name">last name</label>
-      <input type="text" class="form-control" id="last_name">
-    </div>
-  </div>
-  <div class="col-sm-12 col-md-9 col-md-offset-3">
-    <div class="form-group">
-      <label for="phone">phone number</label>
-      <input type="text" class="form-control" id="phone_number">
-    </div>
-  </div>
-  <div class="col-sm-12 col-md-9 col-md-offset-3">
-    <div class="form-group">
-      <label for="fax">fax number</label>
-      <input type="text" class="form-control" id="fax">
-    </div>
-  </div>
-  <div class="col-sm-12 col-md-9 col-md-offset-3">
-    <div class="form-group">
-      <label for="email">email</label>
-      <input type="email" class="form-control" id="email">
+      <input type="text" class="form-control" id="internal_costs" name="internal_cost">
     </div>
   </div>
 
