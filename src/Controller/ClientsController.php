@@ -53,11 +53,15 @@ class ClientsController extends AppController
   // Create new client
   public function create()
   {
-      // FIXME
       $this->loadModel('Contacts');
       if ($this->request->is('post')) {
           $contact = $this->Contacts->newEntity();
+          $client = $this->Clients->newEntity([
+            'associated' => ['Contacts'],
+          ]);
           $data = $this->request->data;
+
+          // Get contact data from post form
           $contact_data = array(
           'first_name' => $data['firstname'],
           'last_name' => $data['lastname'],
@@ -65,37 +69,36 @@ class ClientsController extends AppController
           'phone' => $data['phone'],
           'fax' => $data['fax'],
         );
+
+          // Get client data from post form
+          $client_data = array(
+      'client_name' => $data['client_name'],
+      'street' => $data['street'],
+      'street_number' => $data['street_number'],
+      'area_code' => $data['area_code'],
+      'city' => $data['city'],
+      'country' => $data['country'],
+      );
           $contact = $this->Contacts->patchEntity($contact, $contact_data);
+
+          // If contact validates, update client info with contact id and attempt to save
           if ($this->Contacts->save($contact)) {
-                  $id = $contact->id;
-                  $this->Flash->success('The contact has been saved. ID: '.$id, ['id' => $id]);
+              $client = $this->Clients->patchEntity($client, $client_data);
+              $client->contact_id = $contact->id;
+
+              if ($this->Clients->save($client)) {
+                  $this->Flash->success('The client has been saved.');
 
                   return $this->redirect(['action' => 'index']);
+              }
+              $this->Flash->error(__('Unable to add company.'));
 
-
-            //
-            //   $client_data = array(
-            // 'client_name' => $data['client_name'],
-            // 'street' => $data['street'],
-            // 'street_number' => $data['street_number'],
-            // 'area_code' => $data['area_code'],
-            // 'city' => $data['city'],
-            // 'country' => $data['country'],
-            // 'contact_id' => $contact,
-            // );
-            //
-            //   $client = $this->Clients->newEntity($client_data, [
-            //     'associated' => ['Contacts'],
-            //   ]);
-            //   if ($this->Clients->save($client)) {
-            //       $this->Flash->success('The contact has been saved', ['id' => $id]);
-            //
-            //       return $this->redirect(['action' => 'index']);
-            //   }
-            //   $this->Flash->error(__('Unable to add company.'));
+              // If company info doesn't validate, delete client's contact
+              $this->Contacts->delete($contact);
           }
           $errors = $contact->errors();
-          $this->Flash->error('Unable to add contact: '.debug($errors));
+
+          $this->Flash->error('Unable to add contact.');
       }
   }
 
