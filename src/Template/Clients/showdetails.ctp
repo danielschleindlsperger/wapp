@@ -53,7 +53,9 @@ $this->assign('title', $data['client_name']);
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" id="delete-for-sure">Delete Customer</button>
+        <form class="form-horizontal" action="<?=$delete_url?>" method="post">
+          <input type="submit" class="btn btn-primary" id="delete-for-sure" value="Delete Customer">
+        </form>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->

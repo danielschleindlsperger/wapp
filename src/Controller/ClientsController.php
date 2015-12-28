@@ -9,6 +9,7 @@ class ClientsController extends AppController
         parent::initialize();
 
         $this->loadComponent('Flash'); // Include the FlashComponent
+        $this->loadComponent('RequestHandler');
     }
 
   // List clients
@@ -43,6 +44,7 @@ class ClientsController extends AppController
             'contact_email' => $contact->email,
             'contact_fax' => $contact->fax,
           ];
+
       $this->set('data', $data);
   }
 
@@ -177,22 +179,21 @@ class ClientsController extends AppController
   // Delete existing client
   public function delete($id = null)
   {
-    $this->loadModel('Contacts');
+      $this->request->allowMethod(['post', 'delete']);
+      $this->loadModel('Contacts');
 
-    $this->autoRender = false;
+      $this->autoRender = false;
 
     // AJAX request
-        $client = $this->Clients->find()->where(['id' => $id])->first();
-        $contact_id = $client->contact_id;
-        $contact = $this->Contacts->find()->where(['id' => $contact_id])->first();
+      $client = $this->Clients->get($id);
+      $contact_id = $client->contact_id;
+      $contact = $this->Contacts->get($contact_id);
+      if ($this->Clients->delete($client)) {
         if ($this->Contacts->delete($contact)){
-          if ($this->Clients->delete($client)){
-            $data = array(
-              'content' => 'Successfully deleted Customer.',
-              'error' => 'none'
-            );
-            return json_encode($data);
-          }
+          $this->Flash->success('The customer has been deleted.');
+
+          return $this->redirect(['action' => 'index']);
         }
+      }
   }
 }
