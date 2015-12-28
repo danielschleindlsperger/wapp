@@ -77,6 +77,14 @@ Router::connect('/projects/create',
 Router::connect('/clients/create',
     array('controller' => 'Clients', 'action' => 'create')
 );
+Router::connect('/clients/edit/:id',
+    array('controller' => 'Clients', 'action' => 'edit'),
+    array('pass' => array('id')
+));
+Router::connect('/clients/delete/:id',
+    array('controller' => 'Clients', 'action' => 'delete'),
+    array('pass' => array('id')
+));
 
 /**
  * Load all plugin routes.  See the Plugin documentation on

@@ -30,12 +30,6 @@ html, body {
 .content {
     margin-top: 50px;
 }
-#map {
-    height: 100%;
-}
-.map-parent {
-    height: 100%;
-}
 
 /* Input glow */
 
@@ -51,13 +45,35 @@ html, body {
 }
 
 /* Client's project list*/
+
 .project-list-title {
-  font-size: 2rem;
-  padding-left: 2rem;
-  padding-right: 2rem;
+    font-size: 2rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+.cake-debug {
+    margin-top: 200px;
 }
 
+/* Map */
 
-.cake-debug {
-  margin-top: 200px;
+#map {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
+.Flexible-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    padding-top: 30px;
+    height: 0;
+    overflow: hidden;
+}
+.Flexible-container iframe, .Flexible-container object, .Flexible-container embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }

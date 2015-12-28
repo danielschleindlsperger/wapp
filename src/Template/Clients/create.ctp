@@ -126,6 +126,5 @@ $this->assign('title', 'Create Customer');
   <?php
     $this->start('more_js');
    ?>
-   <?= $this->Html->script('create_client.js') ?>
   <?php
     $this->end('more_js')?>

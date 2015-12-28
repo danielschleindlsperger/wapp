@@ -113,10 +113,3 @@ $this->assign('title', 'Create Project');
     </div>
   </div>
   </form>
-
-<?php
-  $this->start('more_js');
- ?>
- <?= $this->Html->script('create_project.js') ?>
-<?php
-  $this->end('more_js')?>
