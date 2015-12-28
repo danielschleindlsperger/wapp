@@ -52,9 +52,9 @@ $this->assign('title', $data['client_name']);
         <p>Do you really want to delete <?= $data['client_name']?> and their contact?</p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         <form class="form-horizontal" action="<?=$delete_url?>" method="post">
-          <input type="submit" class="btn btn-primary" id="delete-for-sure" value="Delete Customer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <input type="submit" class="btn btn-primary" id="delete-for-sure" value="Delete Customer">
         </form>
       </div>
     </div><!-- /.modal-content -->
@@ -67,7 +67,7 @@ $this->assign('title', $data['client_name']);
   </div>
   <div class="col-sm-12 col-md-3 col-md-offset-0">
     <div class="btn-group">
-      <button class="btn btn-default" type="button" id="delete-button" data-url="<?=$delete_url?>"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>&nbsp;Delete</button>
+      <button class="btn btn-default" type="button" id="delete-button" data-toggle="modal" data-target="#modal-confirm-delete"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>&nbsp;Delete</button>
       <a class="btn btn-default" href="<?=$edit_url?>"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>&nbsp;Edit</a>
     </div>
   </div>

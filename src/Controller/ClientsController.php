@@ -184,7 +184,6 @@ class ClientsController extends AppController
 
       $this->autoRender = false;
 
-    // AJAX request
       $client = $this->Clients->get($id);
       $contact_id = $client->contact_id;
       $contact = $this->Contacts->get($contact_id);

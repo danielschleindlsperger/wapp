@@ -39,7 +39,6 @@ use Cake\Routing\Router;
  * `:action` markers.
  *
  */
-Router::extensions('json', 'xml');
 Router::defaultRouteClass('DashedRoute');
 
 Router::scope('/', function ($routes) {
@@ -84,6 +83,10 @@ Router::connect('/clients/edit/:id',
 ));
 Router::connect('/clients/delete/:id',
     array('controller' => 'Clients', 'action' => 'delete'),
+    array('pass' => array('id')
+));
+Router::connect('/projects/delete/:id',
+    array('controller' => 'Projects', 'action' => 'delete'),
     array('pass' => array('id')
 ));
 

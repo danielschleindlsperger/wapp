@@ -17,8 +17,22 @@ use Cake\Core\Configure;
 use Cake\Datasource\ConnectionManager;
 use Cake\Error\Debugger;
 use Cake\Network\Exception\NotFoundException;
+use Cake\Routing\Router;
+use Cake\I18n\Time;
 
 $this->layout = false;
+
+$edit_url = Router::url(array(
+    'controller' => 'projects',
+    'action' => 'edit',
+    $data['project_id'],
+  ), true);
+
+$delete_url = Router::url(array(
+    'controller' => 'projects',
+    'action' => 'delete',
+    $data['project_id'],
+  ));
 
 if (!Configure::read('debug')):
     throw new NotFoundException();
@@ -27,14 +41,35 @@ endif;
 <?php $this->extend('/Layout/default');
 $this->assign('title', $data['project_name']);
 ?>
+
+<div class="modal fade" id="modal-confirm-delete" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Delete Project</h4>
+      </div>
+      <div class="modal-body">
+        <p>Do you really want to delete <?= $data['project_name']?>?</p>
+      </div>
+      <div class="modal-footer">
+        <form class="form-horizontal" action="<?=$delete_url?>" method="post">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <input type="submit" class="btn btn-primary" id="delete-for-sure" value="Delete Project">
+        </form>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
 <div class="row">
   <div class="col-sm-12 col-md-9">
     <h1><?=$data['project_name']?></h1>
   </div>
   <div class="col-sm-12 col-md-3 col-md-offset-0">
     <div class="btn-group">
-      <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>&nbsp;Delete</button>
-      <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>&nbsp;Edit</button>
+      <button class="btn btn-default" type="button" id="delete-button" data-toggle="modal" data-target="#modal-confirm-delete"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>&nbsp;Delete</button>
+      <a class="btn btn-default" href="<?=$edit_url?>"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>&nbsp;Edit</a>
     </div>
   </div>
 </div>

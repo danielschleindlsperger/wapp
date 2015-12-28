@@ -35,7 +35,7 @@ $this->assign('title', 'Projects');
     'controller' => 'projects',
     'action' => 'create'
   )); ?>">Create new Project</a>
-
+<?= $this->Flash->render() ?>
 <div class="list-group">
   <?php foreach ($projects as $project){
     echo '<a href="'.$url.'/'.urlencode($project->id).'"'.' class="list-group-item">'.$project->project_name.'</a>';

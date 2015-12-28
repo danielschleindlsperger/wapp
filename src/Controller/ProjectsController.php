@@ -18,15 +18,15 @@ class ProjectsController extends AppController
       $this->loadModel('Clients');
       $this->loadModel('Contacts');
 
-      $project = $this->Projects->find()->where(['id' => $id])->first();
+      $project = $this->Projects->get($id);
       $client_id = $project->client_id;
-      $client = $this->Clients->find()->where(['id' => $client_id])->first();
+      $client = $this->Clients->get($client_id);
       $contact_id = $client->contact_id;
-      $contact = $this->Contacts->find()->where(['id' => $contact_id])->first();
+      $contact = $this->Contacts->get($contact_id);
 
       $data = [
         'project_name' => $project->project_name,
-        'project_id' => $project->project_id,
+        'project_id' => $project->id,
         'client_name' => $client->client_name,
         'contact_firstname' => $contact->first_name,
         'contact_lastname' => $contact->last_name,
@@ -38,6 +38,7 @@ class ProjectsController extends AppController
         'start_date' => $project->start_date,
         'end_date' => $project->end_date,
       ];
+      debug($data);
       $this->set('data', $data);
   }
 
@@ -84,7 +85,21 @@ class ProjectsController extends AppController
   }
 
   // Delete existing project
-  public function delete()
+  public function delete($id = null)
   {
+      $this->request->allowMethod(['post', 'delete']);
+      $this->loadModel('Clients');
+      $this->loadModel('Contacts');
+
+      $this->autoRender = false;
+
+      $project = $this->Projects->get($id);
+
+      if ($this->Projects->delete($project)) {
+          $this->Flash->success('The project has been deleted.');
+
+          return $this->redirect(['action' => 'index']);
+      }
+
   }
 }
