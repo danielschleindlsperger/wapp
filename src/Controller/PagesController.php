@@ -62,4 +62,15 @@ class PagesController extends AppController
             throw new NotFoundException();
         }
     }
+
+    public function map(){
+      $this->loadModel('Clients');
+      $this->loadModel('Projects');
+      $clients = $this->Clients->find('all');
+      foreach ($clients as $client){
+      $client->projects = $this->Projects->find()->where(['client_id' => $client->id]);
+      }
+      debug($clients);
+      $this->set('clients', $clients);
+    }
 }

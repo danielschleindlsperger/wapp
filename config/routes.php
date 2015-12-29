@@ -54,15 +54,9 @@ Router::scope('/', function ($routes) {
     $routes->fallbacks('DashedRoute');
 });
 
-Router::scope('/map', function ($routes) {
-
-    $routes->connect('/', ['controller' => 'Pages', 'action' => 'display', 'map']);
-
-    $routes->connect('/pages/*', ['controller' => 'Pages', 'action' => 'display']);
-
-    $routes->fallbacks('DashedRoute');
-});
-
+Router::connect('/map',
+    array('controller' => 'Pages', 'action' => 'map')
+);
 Router::connect('/clients/:id',
     array('controller' => 'Clients', 'action' => 'showdetails'),
     array('pass' => array('id')

@@ -17,12 +17,20 @@ use Cake\Core\Configure;
 use Cake\Datasource\ConnectionManager;
 use Cake\Error\Debugger;
 use Cake\Network\Exception\NotFoundException;
+use Cake\Routing\Router;
+
+$url = Router::url(array(
+   'controller' => 'clients',
+   'action' => 'showdetails'
+ ), true);
 
 $this->layout = false;
 
 if (!Configure::read('debug')):
     throw new NotFoundException();
 endif;
+
+
 ?>
 <?php $this->extend('/Layout/default');
 $this->assign('title', 'Home');
@@ -31,6 +39,23 @@ $this->assign('title', 'Home');
   $this->start('more_js');
  ?>
  <div id="map"></div>
+ <script>
+  var client_data = [
+    <?php foreach ($clients as $client){
+      echo '{'.
+        'client_name: "'.htmlspecialchars($client->client_name).'", '.
+        'client_link: "'.$url.'/'.$client->id.'", '.
+        'client_icon_color: "'.htmlspecialchars($this->IconColor->getColor($client->projects)).'", '.
+        'street: "'.htmlspecialchars($client->street).'", '.
+        'street_number: "'.htmlspecialchars($client->street_number).'", '.
+        'area_code: "'.htmlspecialchars($client->area_code).'", '.
+        'city: "'.htmlspecialchars($client->city).'", '.
+        'country: "'.htmlspecialchars($client->country).
+        '"},';
+    }
+    ?>
+  ];
+ </script>
  <?= $this->Html->script('wmap.js') ?>
  <?= $this->Html->script('https://maps.googleapis.com/maps/api/js?callback=initMap') ?>
 <?php
