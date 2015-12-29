@@ -81,6 +81,10 @@ Router::connect('/clients/edit/:id',
     array('controller' => 'Clients', 'action' => 'edit'),
     array('pass' => array('id')
 ));
+Router::connect('/projects/edit/:id',
+    array('controller' => 'Projects', 'action' => 'edit'),
+    array('pass' => array('id')
+));
 Router::connect('/clients/delete/:id',
     array('controller' => 'Clients', 'action' => 'delete'),
     array('pass' => array('id')

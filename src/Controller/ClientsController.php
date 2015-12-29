@@ -77,12 +77,12 @@ class ClientsController extends AppController
     'city' => $data['city'],
     'country' => $data['country'],
     );
-          $contact = $this->Contacts->find()->where(['id' => $contact_id])->first();
+          $contact = $this->Contacts->get($contact_id);
           $contact = $this->Contacts->patchEntity($contact, $contact_data);
 
         // If contact validates, update client info with contact id and attempt to save
         if ($this->Contacts->save($contact)) {
-            $client = $this->Clients->find()->where(['id' => $id])->first();
+            $client = $this->Clients->get($id);
             $client = $this->Clients->patchEntity($client, $client_data);
             $client->contact_id = $contact->id;
 
