@@ -1,14 +1,14 @@
 var map;
 var markers = [];
 var info_window;
-var map_icons = {
-  blue: 'img/map_icon_blue.png',
-  black: 'img/map_icon_black.png',
-  gray: 'img/map_icon_gray.png',
-  green: 'img/map_icon_green.png',
-  red: 'img/map_icon_red.png',
-  yellow: 'img/map_icon_yellow.png'
-};
+// var map_icons = {
+// 	blue: 'img/map_icon_blue.png',
+// 	black: 'img/map_icon_black.png',
+// 	gray: 'img/map_icon_gray.png',
+// 	green: 'img/map_icon_green.png',
+// 	red: 'img/map_icon_red.png',
+// 	yellow: 'img/map_icon_yellow.png'
+// };
 
 function initMap() {
 	var geocoder = new google.maps.Geocoder();
@@ -21,14 +21,15 @@ function initMap() {
 		zoom: 2
 	});
 	for (var i = 0; i < client_data.length; i++) {
-		geocodeAddress(geocoder, map, client_data[i], i);
+    var color = setColor(client_data[i].client_icon_color);
+		geocodeAddress(geocoder, map, client_data[i], i, color);
 	}
 	info_window = new google.maps.InfoWindow({
 		content: 'loading'
 	});
 }
 
-function geocodeAddress(geocoder, resultsMap, client, index) {
+function geocodeAddress(geocoder, resultsMap, client, index, color) {
 	var address = client.client_name + ' ' + client.street + ' ' + client.street_number + ' ' + client.area_code + ' ' + client.city;
 	var infoContent = '<h4>' +
 		client.client_name +
@@ -48,7 +49,12 @@ function geocodeAddress(geocoder, resultsMap, client, index) {
 			markers[index] = new google.maps.Marker({
 				map: resultsMap,
 				position: results[0].geometry.location,
-				title: client.client_name
+				title: client.client_name,
+				icon: {
+					url: color,
+					scaledSize: new google.maps.Size(32, 32),
+          anchor: new google.maps.Point(16, 32)
+				}
 			});
 			markers[index].addListener('click', function () {
 				info_window.setContent(infoContent);
@@ -58,4 +64,8 @@ function geocodeAddress(geocoder, resultsMap, client, index) {
 			alert('Geocode was not successful for the following reason: ' + status);
 		}
 	});
+}
+
+function setColor(color){
+  return 'img/map_icon_'+color+'.png';
 }

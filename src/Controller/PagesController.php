@@ -70,7 +70,6 @@ class PagesController extends AppController
       foreach ($clients as $client){
       $client->projects = $this->Projects->find()->where(['client_id' => $client->id]);
       }
-      debug($clients);
       $this->set('clients', $clients);
     }
 }
