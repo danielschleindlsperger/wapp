@@ -69,12 +69,10 @@ $this->assign('title', $data['client_name']);
   <div class="col-sm-12 col-md-9">
     <h1><?=$data['client_name']?></h1>
   </div>
-  <div class="col-sm-12 col-md-3 col-md-offset-0">
     <div class="btn-group">
       <button class="btn btn-default" type="button" id="delete-button" data-toggle="modal" data-target="#modal-confirm-delete"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>&nbsp;Delete</button>
       <a class="btn btn-default" href="<?=$edit_url?>"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>&nbsp;Edit</a>
     </div>
-  </div>
 </div>
 <div class="row">
   <div class="col-sm-12 col-md-4">

@@ -27,6 +27,7 @@ class ProjectsController extends AppController
       $data = [
         'project_name' => $project->project_name,
         'project_id' => $project->id,
+        'status' => $project->status,
         'client_name' => $client->client_name,
         'contact_firstname' => $contact->first_name,
         'contact_lastname' => $contact->last_name,
@@ -44,11 +45,10 @@ class ProjectsController extends AppController
   // Edit project
   public function edit($id = null)
   {
-    $this->loadModel('Clients');
+      $this->loadModel('Clients');
 
     // POST request
     if ($this->request->is('post')) {
-
         $data = $this->request->data;
 
         $client = $this->Clients->find()->where(['client_name' => $data['client_name']])->first();
@@ -78,11 +78,11 @@ class ProjectsController extends AppController
 
     // GET request
     $project = $this->Projects->get($id);
-    $client_id = $project->client_id;
-    $client = $this->Clients->get($client_id);
-    $clients = $this->Clients->find('all');
+      $client_id = $project->client_id;
+      $client = $this->Clients->get($client_id);
+      $clients = $this->Clients->find('all');
 
-    $data = array(
+      $data = array(
         'client_name' => $client->client_name,
         'client_id' => $client->id,
         'clients' => $clients,
@@ -92,9 +92,9 @@ class ProjectsController extends AppController
         'start_date' => $project->start_date,
         'end_date' => $project->end_date,
         'contract_amount' => $project->contract_amount,
-        'internal_cost' => $project->internal_cost
+        'internal_cost' => $project->internal_cost,
       );
-    $this->set('data', $data);
+      $this->set('data', $data);
   }
 
   // Create new project
@@ -150,6 +150,5 @@ class ProjectsController extends AppController
 
           return $this->redirect(['action' => 'index']);
       }
-
   }
 }

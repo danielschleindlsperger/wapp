@@ -40,11 +40,22 @@ html, body {
 
 /* Buttons */
 
-.btn-default:active {
-    box-shadow: tomato;
-}
-.create-button {
+.create-button, .submit-btn, .btn-group{
     float: right;
+}
+.btn-primary {
+    background-color: rgb(125, 0, 0);
+    border-color: rgb(204, 204, 204);
+}
+.btn-primary:hover {
+    background-color: rgb(203, 0, 0);
+    border-color: #adadad;
+}
+.btn-default:active {
+    border-color: #adadad;
+}
+.btn:focus, .btn:active:focus, .btn.active:focus, .btn.focus, .btn:active.focus, .btn.active.focus {
+    outline: none;
 }
 
 /* Client's project list*/
@@ -77,8 +88,8 @@ html, body {
     font-weight: bold;
     height: 5.5rem;
     width: 5.5rem;
+    line-height: 5.5rem;
     margin-right: 1.5rem;
-    line-height: 6rem;
     background-color: rgba(100, 100, 100, 0.1);
 }
 .list-element {
@@ -88,10 +99,24 @@ html, body {
 /* Headings */
 
 h1 {
-    font-family: Oswald, Arial, sans-serif;
     margin-top: 4rem;
     margin-bottom: 4rem;
 }
-h2, h3, h4 {
+h3 {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+h1, h2, h3, h4 {
     font-family: Oswald, Arial, sans-serif;
+}
+
+/* Links */
+
+a, a:hover {
+    color: tomato;
+    text-decoration: none;
+}
+.vertical-text-center {
+    height: 6rem;
+    line-height: 6rem;
 }
