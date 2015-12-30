@@ -1,27 +1,19 @@
 var map;
 var markers = [];
 var info_window;
-// var map_icons = {
-// 	blue: 'img/map_icon_blue.png',
-// 	black: 'img/map_icon_black.png',
-// 	gray: 'img/map_icon_gray.png',
-// 	green: 'img/map_icon_green.png',
-// 	red: 'img/map_icon_red.png',
-// 	yellow: 'img/map_icon_yellow.png'
-// };
 
 function initMap() {
 	var geocoder = new google.maps.Geocoder();
 
 	map = new google.maps.Map(document.getElementById('map'), {
 		center: {
-			lat: -34.397,
-			lng: 150.644
+			lat: 52.5,
+			lng: 13.4
 		},
-		zoom: 2
+		zoom: 3
 	});
 	for (var i = 0; i < client_data.length; i++) {
-    var color = setColor(client_data[i].client_icon_color);
+		var color = setColor(client_data[i].client_icon_color);
 		geocodeAddress(geocoder, map, client_data[i], i, color);
 	}
 	info_window = new google.maps.InfoWindow({
@@ -53,7 +45,7 @@ function geocodeAddress(geocoder, resultsMap, client, index, color) {
 				icon: {
 					url: color,
 					scaledSize: new google.maps.Size(32, 32),
-          anchor: new google.maps.Point(16, 32)
+					anchor: new google.maps.Point(16, 32)
 				}
 			});
 			markers[index].addListener('click', function () {
@@ -66,6 +58,6 @@ function geocodeAddress(geocoder, resultsMap, client, index, color) {
 	});
 }
 
-function setColor(color){
-  return 'img/map_icon_'+color+'.png';
+function setColor(color) {
+	return 'img/map_icon_' + color + '.png';
 }

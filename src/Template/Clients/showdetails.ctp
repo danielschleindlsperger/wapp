@@ -32,6 +32,10 @@ $delete_url = Router::url(array(
     'action' => 'delete',
     $data['client_id'],
   ));
+$client_url = Router::url(array(
+   'controller' => 'clients',
+   'action' => 'showdetails'
+ ), true);
 
 if (!Configure::read('debug')):
     throw new NotFoundException();
@@ -106,6 +110,20 @@ $this->assign('title', $data['client_name']);
 <?php
   $this->start('more_js');
  ?>
+<script>
+var client_data =
+  <?php
+  echo '{'.
+      'client_name: "'.htmlspecialchars($data['client_name']).'", '.
+      'client_link: "'.$client_url.'/'.$data['client_id'].'", '.
+      'street: "'.htmlspecialchars($data['street']).'", '.
+      'street_number: "'.htmlspecialchars($data['street_number']).'", '.
+      'area_code: "'.htmlspecialchars($data['postal_code']).'", '.
+      'city: "'.htmlspecialchars($data['city']).'", '.
+      'country: "'.htmlspecialchars($data['country']).
+      '"}';
+  ?>;
+</script>
  <?= $this->Html->script('client_showdetails_map.js') ?>
  <?= $this->Html->script('delete_client.js') ?>
  <?= $this->Html->script('https://maps.googleapis.com/maps/api/js?callback=initMap') ?>
