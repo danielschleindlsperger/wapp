@@ -49,6 +49,8 @@ $url = $this->request->here;
     <script type="text/javascript">var BaseUrl = '<?php echo Router::url('/', true); ?>';</script>
 
     <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+
     <?= $this->fetch('script') ?>
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>

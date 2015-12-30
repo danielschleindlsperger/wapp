@@ -4,18 +4,33 @@ namespace App\Controller;
 
 class ClientsController extends AppController
 {
+    public $paginate = [
+        'order' => [
+            'Clients.client_name' => 'asc',
+        ],
+    ];
     public function initialize()
     {
         parent::initialize();
 
         $this->loadComponent('Flash'); // Include the FlashComponent
         $this->loadComponent('RequestHandler');
+        $this->loadComponent('Paginator');
     }
 
   // List clients
   public function index()
   {
-      $this->set('clients', $this->Clients->find('all'));
+      $this->loadModel('Projects');
+
+      $clients = $this->Clients->find('all');
+
+      foreach ($clients as $client){
+        $client->projects = $this->Projects->find()->where(['client_id' => $client->id]);
+      }
+
+      //$this->set('clients', $this->Clients->find('all'));
+      $this->set('clients', $clients);
   }
 
   // Show details to specific client
@@ -188,11 +203,11 @@ class ClientsController extends AppController
       $contact_id = $client->contact_id;
       $contact = $this->Contacts->get($contact_id);
       if ($this->Clients->delete($client)) {
-        if ($this->Contacts->delete($contact)){
-          $this->Flash->success('The customer has been deleted.');
+          if ($this->Contacts->delete($contact)) {
+              $this->Flash->success('The customer has been deleted.');
 
-          return $this->redirect(['action' => 'index']);
-        }
+              return $this->redirect(['action' => 'index']);
+          }
       }
   }
 }

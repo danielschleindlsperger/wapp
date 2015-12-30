@@ -43,6 +43,9 @@ html, body {
 .btn-default:active {
     box-shadow: tomato;
 }
+.create-button {
+    float: right;
+}
 
 /* Client's project list*/
 
@@ -63,17 +66,32 @@ html, body {
     height: 100%;
     width: 100%;
 }
-.Flexible-container {
-    position: relative;
-    padding-bottom: 56.25%;
-    padding-top: 30px;
-    height: 0;
-    overflow: hidden;
+
+/* Client index list */
+
+.glyphicon:before {
+    padding-right: 1rem;
 }
-.Flexible-container iframe, .Flexible-container object, .Flexible-container embed {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+.project-counter-element {
+    font-size: 1.5rem;
+    font-weight: bold;
+    height: 5.5rem;
+    width: 5.5rem;
+    margin-right: 1.5rem;
+    line-height: 6rem;
+    background-color: rgba(100, 100, 100, 0.1);
+}
+.list-element {
+    padding-left: 0;
+}
+
+/* Headings */
+
+h1 {
+    font-family: Oswald, Arial, sans-serif;
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+}
+h2, h3, h4 {
+    font-family: Oswald, Arial, sans-serif;
 }

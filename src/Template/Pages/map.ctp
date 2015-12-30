@@ -45,7 +45,7 @@ $this->assign('title', 'Home');
       echo '{'.
         'client_name: "'.htmlspecialchars($client->client_name).'", '.
         'client_link: "'.$url.'/'.$client->id.'", '.
-        'client_icon_color: "'.htmlspecialchars($this->IconColor->getColor($client->projects)).'", '.
+        'client_icon_color: "'.htmlspecialchars($this->Project->getColor($client->projects)).'", '.
         'street: "'.htmlspecialchars($client->street).'", '.
         'street_number: "'.htmlspecialchars($client->street_number).'", '.
         'area_code: "'.htmlspecialchars($client->area_code).'", '.
