@@ -24,13 +24,13 @@ $this->layout = false;
 $edit_url = Router::url(array(
     'controller' => 'clients',
     'action' => 'edit',
-    $data['client_id'],
+    $client->id,
   ), true);
 
 $delete_url = Router::url(array(
     'controller' => 'clients',
     'action' => 'delete',
-    $data['client_id'],
+    $client->id,
   ));
 $client_url = Router::url(array(
    'controller' => 'clients',
@@ -42,7 +42,7 @@ if (!Configure::read('debug')):
 endif;
 ?>
 <?php $this->extend('/Layout/default');
-$this->assign('title', $data['client_name']);
+$this->assign('title', $client->client_name);
 ?>
 
 <div class="modal fade" id="modal-confirm-delete" tabindex="-1" role="dialog">
@@ -53,7 +53,7 @@ $this->assign('title', $data['client_name']);
         <h4 class="modal-title">Delete Customer</h4>
       </div>
       <div class="modal-body">
-        <p>Do you really want to delete <?= $data['client_name']?> and their contact?</p>
+        <p>Do you really want to delete <?= $client->client_name?> and their contact?</p>
       </div>
       <div class="modal-footer">
         <form class="form-horizontal" action="<?=$delete_url?>" method="post">
@@ -67,7 +67,7 @@ $this->assign('title', $data['client_name']);
 
 <div class="row">
   <div class="col-sm-12 col-md-9">
-    <h1><?=$data['client_name']?></h1>
+    <h1><?=$client->client_name?></h1>
   </div>
     <div class="btn-group">
       <button class="btn btn-default" type="button" id="delete-button" data-toggle="modal" data-target="#modal-confirm-delete"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>&nbsp;Delete</button>
@@ -77,9 +77,9 @@ $this->assign('title', $data['client_name']);
 <div class="row">
   <div class="col-sm-12 col-md-4">
     <h3>Adress</h3>
-    <?= $data['street'].' '.$data['street_number'].'<br>'?>
-    <?= $data['postal_code'].' '.$data['city'].'<br>'?>
-    <?= $data['country'] ?>
+    <?= $client->street.' '.$client->street_number.'<br>'?>
+    <?= $client->area_code.' '.$client->city.'<br>'?>
+    <?= $client->country ?>
   </div>
   <div class="col-sm-12 col-md-4" style="height:30rem;">
     <div id="map">
@@ -87,18 +87,18 @@ $this->assign('title', $data['client_name']);
   </div>
   <div class="col-sm-12 col-md-4">
     <h3>Contact</h3>
-    <?= $data['contact_firstname'].' '.$data['contact_lastname'].'<br>'?>
-    Phone number: <?= $data['contact_phone'].'<br>' ?>
+    <?= $client->contact_first_name.' '.$client->contact_last_name.'<br>'?>
+    Phone number: <?= $client->contact_phone.'<br>' ?>
     Email:
-    <a href="mailto:<?=$data['contact_email']?>" target="_top"><?=$data['contact_email']?></a>
+    <a href="mailto:<?=$client->contact_email?>" target="_top"><?=$client->contact_email?></a>
     <br>
-    Fax: <?= $data['contact_fax'] ?>
+    Fax: <?= $client->contact_fax?>
   </div>
 </div>
 <div class="row">
   <h2>Projects</h2>
   <div class="list-group">
-    <?php foreach ($data['projects'] as $project) {
+    <?php foreach ($client->projects as $project) {
     echo '<a href="'.Router::url(array('controller' => 'projects', 'action' => 'showdetails', $project->id), true).'"'.' class="list-group-item" ><span class="project-list-title">'.
       $project->project_name.'</span>&nbsp;Start: '.$this->Time->format($project->start_date, 'd.M.Y').'&nbsp;End: '.$this->Time->format($project->end_date, 'd.M.Y').'&nbsp;Contract amount: '.$this->Number->currency($project['contract_amount'], 'EUR').'</a>';
 }
@@ -112,13 +112,13 @@ $this->assign('title', $data['client_name']);
 var client_data =
   <?php
   echo '{'.
-      'client_name: "'.htmlspecialchars($data['client_name']).'", '.
-      'client_link: "'.$client_url.'/'.$data['client_id'].'", '.
-      'street: "'.htmlspecialchars($data['street']).'", '.
-      'street_number: "'.htmlspecialchars($data['street_number']).'", '.
-      'area_code: "'.htmlspecialchars($data['postal_code']).'", '.
-      'city: "'.htmlspecialchars($data['city']).'", '.
-      'country: "'.htmlspecialchars($data['country']).
+      'client_name: "'.htmlspecialchars($client->client_name).'", '.
+      'client_link: "'.$client_url.'/'.$client->id.'", '.
+      'street: "'.htmlspecialchars($client->street).'", '.
+      'street_number: "'.htmlspecialchars($client->street_number).'", '.
+      'area_code: "'.htmlspecialchars($client->area_code).'", '.
+      'city: "'.htmlspecialchars($client->city).'", '.
+      'country: "'.htmlspecialchars($client->country).
       '"}';
   ?>;
 </script>

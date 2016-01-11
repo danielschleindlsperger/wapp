@@ -9,7 +9,6 @@ class ClientsTable extends Table
 {
     public function initialize(array $config)
     {
-        $this->hasOne('Contacts');
     }
 
     public function validationDefault(Validator $validator)
@@ -34,6 +33,15 @@ class ClientsTable extends Table
             ->add('street_number', 'numeric', [
                 'rule' => 'numeric',
                 'message' => 'Street number has to be a numeric value',
-            ]);
+            ])
+            ->notEmpty('contact_first_name', 'First name is required')
+            ->requirePresence('contact_last_name')
+            ->notEmpty('contact_last_name', 'Last name is required')
+            ->requirePresence('contact_email')
+            ->notEmpty('contact_email', 'Contact email is required')
+            ->requirePresence('contact_phone')
+            ->notEmpty('contact_phone', 'Contact phone numer is required')
+            ->requirePresence('contact_fax')
+            ->notEmpty('contact_fax', 'Contact fax number is required');
     }
 }

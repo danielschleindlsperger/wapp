@@ -35,83 +35,50 @@ $this->assign('title', 'Create Project');
 ?>
   <h1>Create new project</h1>
   <?= $this->Flash->render() ?>
-  <form class="form-horizontal" action="<?=$url?>" method="post">
-  <div class="row">
-    <div class="col-sm-12 col-md-3">
-      <h3>Company</h3>
-    </div>
-    <div class="col-sm-12 col-md-9">
-      <div class="form-group">
-        <label for="company_name">company name</label>
-        <select class="form-control" id="company_name" name="client_name">
-          <?php
-            foreach($clients as $client){
-              echo '<option data-id="'.$client->id.'">'.$client->client_name.'</option>';
-            }
-          ?>
-        </select>
-      </div>
-    </div>
 
-    <div class="col-sm-12 col-md-3">
-      <h3>Project</h3>
-    </div>
-    <div class="col-sm-12 col-md-9">
-      <form class="form-horizontal">
-        <div class="form-group">
-          <label for="project_name">project name</label>
-          <input type="text" class="form-control" id="project_name" name="project_name">
-        </div>
-    </div>
-    <div class="col-sm-12 col-md-9 col-md-offset-3">
-      <div class="form-group">
-        <label for="project_status">project status</label>
-        <select class="form-control" id="project_status" name="status">
-          <option>planned</option>
-          <option>began</option>
-          <option>stopped</option>
-          <option>cancelled</option>
-          <option>completed</option>
-        </select>
-      </div>
-    </div>
+  <?php
+  // Set options for client select list
+  $client_name_options = [];
+  foreach($clients as $client){
+    $client_name_options[$client->client_name]=$client->client_name;
+  }
+  ?>
 
-    <div class="col-sm-12 col-md-3">
-      <h3>Dates</h3>
-    </div>
-    <div class="col-sm-12 col-md-9">
-      <div class="form-group">
-        <label for="start_date">start date</label>
-        <input type="date" class="form-control" id="start_date" name="start_date">
-      </div>
-    </div>
-    <div class="col-sm-12 col-md-9 col-md-offset-3">
-      <div class="form-group">
-        <label for="end_date">end date</label>
-        <input type="date" class="form-control" id="end_date" name="end_date">
-      </div>
-    </div>
-
-    <div class="col-sm-12 col-md-3">
-      <h3>Accounting</h3>
-    </div>
-    <div class="col-sm-12 col-md-9">
-      <div class="form-group">
-        <label for="contract_amound">contract amount</label>
-        <input type="number" step="0.01" class="form-control" id="contract_amount" name="contract_amount">
-      </div>
-    </div>
-    <div class="col-sm-12 col-md-9 col-md-offset-3">
-      <div class="form-group">
-        <label for="internal_costs">internal costs</label>
-        <input type="number" step="0.01" class="form-control" id="internal_costs" name="internal_cost">
-      </div>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="submit-btn">
-      <input type="submit" value="Submit" class="btn btn-default" id="create-client-submit">
-    </div>
-  </div>
-  </form>
+  <?php
+    echo $this->Form->create(null,[
+      'horizontal' => true,
+      'cols' => [
+        'xs' => [
+          'label' => 12,
+          'input' => 12,
+          'error' => 12
+        ],
+        'md' => [
+          'label' => 2,
+          'input' => 8,
+          'error' => 2
+        ]
+      ]
+    ]);
+    echo '<h3>Company</h3>';
+    echo $this->Form->input('client_name', ['type' => 'select', 'options' => $client_name_options]);
+    echo '<h3>Project</h3>';
+    echo $this->Form->input('project_name', ['type' => 'text']);
+    echo $this->Form->input('status', ['type' => 'select', 'options' => [
+      'planned' => 'planned', 'began' => 'began', 'stopped' => 'stopped', 'cancelled' => 'cancelled' , 'completed' => 'completed'
+      ]]);
+    echo '<h3>Dates</h3>';
+    echo $this->Form->input('start_date', ['type' => 'date']);
+    echo $this->Form->input('end_date', ['type' => 'date']);
+    echo '<h3>Accounting</h3>';
+    echo $this->Form->input('contract_amount', ['type' => 'number', 'step' => 0.01]);
+    echo $this->Form->input('internal_cost', ['type' => 'number', 'step' => 0.01]);
+    echo '<h3>Contact person</h3>';
+    echo $this->Form->input('contact_first_name', ['type' => 'text']);
+    echo $this->Form->input('contact_last_name', ['type' => 'text']);
+    echo $this->Form->input('contact_phone', ['type' => 'text']);
+    echo $this->Form->input('contact_fax', ['type' => 'text']);
+    echo $this->Form->input('contact_email', ['type' => 'email']);
+    echo $this->Form->submit('Create Project');
+    echo $this->Form->end();
+   ?>

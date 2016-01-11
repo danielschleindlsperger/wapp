@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use Cake\Network\Exception\NotFoundException;
+
 class ClientsController extends AppController
 {
     public $paginate = [
@@ -25,11 +27,10 @@ class ClientsController extends AppController
 
       $clients = $this->Clients->find('all');
 
-      foreach ($clients as $client){
-        $client->projects = $this->Projects->find()->where(['client_id' => $client->id]);
+      foreach ($clients as $client) {
+          $client->projects = $this->Projects->find()->where(['client_id' => $client->id]);
       }
 
-      //$this->set('clients', $this->Clients->find('all'));
       $this->set('clients', $clients);
   }
 
@@ -37,30 +38,19 @@ class ClientsController extends AppController
   public function showDetails($id = null)
   {
       $this->loadModel('Projects');
-      $this->loadModel('Contacts');
 
       $client = $this->Clients->find()->where(['id' => $id])->first();
+
+      // 404 if client doesn't exist
+      if (empty($client)) {
+          throw new NotFoundException(__('Client not found'));
+      }
+
       $projects = $this->Projects->find()->where(['client_id' => $id]);
-      $contact_id = $client->contact_id;
-      $contact = $this->Contacts->find()->where(['id' => $contact_id])->first();
 
-      $data = [
-            'client_name' => $client->client_name,
-            'client_id' => $client->id,
-            'street' => $client->street,
-            'street_number' => $client->street_number,
-            'postal_code' => $client->area_code,
-            'city' => $client->city,
-            'country' => $client->country,
-            'projects' => $projects,
-            'contact_firstname' => $contact->first_name,
-            'contact_lastname' => $contact->last_name,
-            'contact_phone' => $contact->phone,
-            'contact_email' => $contact->email,
-            'contact_fax' => $contact->fax,
-          ];
+      $client->projects = $projects;
 
-      $this->set('data', $data);
+      $this->set('client', $client);
   }
 
   // Edit client
@@ -72,42 +62,14 @@ class ClientsController extends AppController
       if ($this->request->is('post')) {
           $data = $this->request->data;
           $client = $this->Clients->find()->where(['id' => $id])->first();
-          $contact_id = $client->contact_id;
+          $client = $this->Clients->patchEntity($client, $data);
 
-        // Get contact data from post form
-        $contact_data = array(
-        'first_name' => $data['firstname'],
-        'last_name' => $data['lastname'],
-        'email' => $data['email'],
-        'phone' => $data['phone'],
-        'fax' => $data['fax'],
-      );
+          if ($this->Clients->save($client)) {
+              $this->Flash->success('The client has been edited successfully.');
 
-        // Get client data from post form
-        $client_data = array(
-    'client_name' => $data['client_name'],
-    'street' => $data['street'],
-    'street_number' => $data['street_number'],
-    'area_code' => $data['area_code'],
-    'city' => $data['city'],
-    'country' => $data['country'],
-    );
-          $contact = $this->Contacts->get($contact_id);
-          $contact = $this->Contacts->patchEntity($contact, $contact_data);
+              return $this->redirect(['action' => 'index']);
+          }
 
-        // If contact validates, update client info with contact id and attempt to save
-        if ($this->Contacts->save($contact)) {
-            $client = $this->Clients->get($id);
-            $client = $this->Clients->patchEntity($client, $client_data);
-            $client->contact_id = $contact->id;
-
-            if ($this->Clients->save($client)) {
-                $this->Flash->success('The client has been edited successfully.');
-
-                return $this->redirect(['action' => 'index']);
-            }
-            $this->Flash->error(__('Unable to edit company.'));
-        }
           $errors = $contact->errors();
 
           $this->Flash->error('Unable to edit contact.');
@@ -117,77 +79,32 @@ class ClientsController extends AppController
 
       $client = $this->Clients->find()->where(['id' => $id])->first();
 
-      $contact_id = $client->contact_id;
-      $contact = $this->Contacts->find()->where(['id' => $contact_id])->first();
+      // 404 if client doesn't exist
+      if (empty($client)) {
+          throw new NotFoundException(__('Client not found'));
+      }
 
-      $data = array(
-          'client_name' => $client->client_name,
-          'client_id' => $client->id,
-          'street' => $client->street,
-          'street_number' => $client->street_number,
-          'postal_code' => $client->area_code,
-          'city' => $client->city,
-          'country' => $client->country,
-          'contact_firstname' => $contact->first_name,
-          'contact_lastname' => $contact->last_name,
-          'contact_phone' => $contact->phone,
-          'contact_email' => $contact->email,
-          'contact_fax' => $contact->fax,
-        );
-      $this->set('data', $data);
+      $this->set('client', $client);
   }
 
   // Create new client
   public function create()
   {
-      $this->loadModel('Contacts');
 
       // POST request
       if ($this->request->is('post')) {
-          $contact = $this->Contacts->newEntity();
-          $client = $this->Clients->newEntity([
-            'associated' => ['Contacts'],
-          ]);
+          $client = $this->Clients->newEntity();
           $data = $this->request->data;
 
-          // Get contact data from post form
-          $contact_data = array(
-          'first_name' => $data['firstname'],
-          'last_name' => $data['lastname'],
-          'email' => $data['email'],
-          'phone' => $data['phone'],
-          'fax' => $data['fax'],
-        );
+          $client = $this->Clients->patchEntity($client, $data);
 
-          // Get client data from post form
-          $client_data = array(
-      'client_name' => $data['client_name'],
-      'street' => $data['street'],
-      'street_number' => $data['street_number'],
-      'area_code' => $data['area_code'],
-      'city' => $data['city'],
-      'country' => $data['country'],
-      );
-          $contact = $this->Contacts->patchEntity($contact, $contact_data);
+          if ($this->Clients->save($client)) {
+              $this->Flash->success('The client has been saved.');
 
-          // If contact validates, update client info with contact id and attempt to save
-          if ($this->Contacts->save($contact)) {
-              $client = $this->Clients->patchEntity($client, $client_data);
-              $client->contact_id = $contact->id;
-
-              if ($this->Clients->save($client)) {
-                  $this->Flash->success('The client has been saved.');
-
-                  return $this->redirect(['action' => 'index']);
-              }
-              $this->Flash->error(__('Unable to add company.'));
-
-              // If company info doesn't validate, delete client's contact
-              $this->Contacts->delete($contact);
+              return $this->redirect(['action' => 'index']);
           }
-          $errors = $contact->errors();
-
-          $this->Flash->error('Unable to add contact.');
+          $errors = $client->errors();
+          $this->Flash->error(__('Unable to add customer.'));
       }
   }
 
@@ -200,14 +117,12 @@ class ClientsController extends AppController
       $this->autoRender = false;
 
       $client = $this->Clients->get($id);
-      $contact_id = $client->contact_id;
-      $contact = $this->Contacts->get($contact_id);
-      if ($this->Clients->delete($client)) {
-          if ($this->Contacts->delete($contact)) {
-              $this->Flash->success('The customer has been deleted.');
 
-              return $this->redirect(['action' => 'index']);
-          }
+      if ($this->Clients->delete($client)) {
+          $this->Flash->success('The customer has been deleted.');
+
+          return $this->redirect(['action' => 'index']);
       }
+      $this->Flash->error(__('Unable to delete customer.'));
   }
 }

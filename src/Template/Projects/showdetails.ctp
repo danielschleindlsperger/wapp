@@ -24,13 +24,13 @@ $this->layout = false;
 $edit_url = Router::url(array(
     'controller' => 'projects',
     'action' => 'edit',
-    $data['project_id'],
+    $project->id,
   ), true);
 
 $delete_url = Router::url(array(
     'controller' => 'projects',
     'action' => 'delete',
-    $data['project_id'],
+    $project->id,
   ));
 
 if (!Configure::read('debug')):
@@ -38,7 +38,7 @@ if (!Configure::read('debug')):
 endif;
 ?>
 <?php $this->extend('/Layout/default');
-$this->assign('title', $data['project_name']);
+$this->assign('title', $project->project_name);
 ?>
 
 <div class="modal fade" id="modal-confirm-delete" tabindex="-1" role="dialog">
@@ -49,7 +49,7 @@ $this->assign('title', $data['project_name']);
         <h4 class="modal-title">Delete Project</h4>
       </div>
       <div class="modal-body">
-        <p>Do you really want to delete <?= $data['project_name']?>?</p>
+        <p>Do you really want to delete <?= $project->project_name?>?</p>
       </div>
       <div class="modal-footer">
         <form class="form-horizontal" action="<?=$delete_url?>" method="post">
@@ -63,7 +63,7 @@ $this->assign('title', $data['project_name']);
 
 <div class="row">
   <div class="col-sm-12 col-md-9">
-    <h1><?=$data['project_name']?></h1>
+    <h1><?=$project->project_name?></h1>
   </div>
   <div class="col-sm-12 col-md-3 col-md-offset-0">
     <div class="btn-group">
@@ -78,7 +78,7 @@ $this->assign('title', $data['project_name']);
     <h3>Timeframe</h3>
   </div>
   <div class="col-sm-12 col-md-9 vertical-text-center">
-    <?= $this->Time->format($data['start_date'], 'd.M.Y').' - '.$this->Time->format($data['end_date'], 'd.M.Y') ?>
+    <?= $this->Time->format($project->start_date, 'd.M.Y').' - '.$this->Time->format($project->end_date, 'd.M.Y') ?>
   </div>
 </div>
 
@@ -87,7 +87,7 @@ $this->assign('title', $data['project_name']);
     <h3>Status</h3>
   </div>
   <div class="col-sm-12 col-md-9 vertical-text-center">
-      <?= $data['status']?>
+      <?= $project->status?>
   </div>
 </div>
 
@@ -99,15 +99,15 @@ $this->assign('title', $data['project_name']);
     <table class="table">
       <tr>
         <th>Contract amount</th>
-        <td><?= $this->Number->currency($data['contract_amount'], 'EUR')?></td>
+        <td><?= $this->Number->currency($project->contract_amount, 'EUR')?></td>
       </tr>
       <tr>
         <th>Internal costs</th>
-        <td><?= $this->Number->currency($data['internal_cost'], 'EUR')?></td>
+        <td><?= $this->Number->currency($project->internal_cost, 'EUR')?></td>
       </tr>
       <tr>
         <th>Net profit</th>
-        <td><?php echo $this->Number->currency($data['contract_amount'] - $data['internal_cost'], 'EUR')?></td>
+        <td><?php echo $this->Number->currency($project->contract_amount - $project->internal_cost, 'EUR')?></td>
       </tr>
     </table>
   </div>
@@ -119,13 +119,13 @@ $this->assign('title', $data['project_name']);
   </div>
   <div class="col-sm-12 col-md-9">
     <h4>
-      <?= $data['client_name']?>
+      <?= $client->client_name?>
     </h4>
-    <?= $data['contact_firstname'].' '.$data['contact_lastname'].'<br>' ?>
-    Phone number: <?= $data['contact_phone'].'<br>' ?>
+    <?= $project->contact_first_name.' '.$project->contact_last_name.'<br>' ?>
+    Phone number: <?= $project->contact_phone.'<br>' ?>
     Email:
-    <a href="mailto:<?=$data['contact_email']?>" target="_top"><?=$data['contact_email']?></a>
+    <a href="mailto:<?=$project->contact_email?>" target="_top"><?=$project->contact_email?></a>
     <br>
-    Fax: <?= $data['contact_fax'] ?>
+    Fax: <?= $project->contact_fax ?>
   </div>
 </div>

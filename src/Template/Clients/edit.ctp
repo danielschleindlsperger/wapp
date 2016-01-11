@@ -24,7 +24,7 @@
 $url = Router::url(array(
     'controller' => 'clients',
     'action' => 'edit',
-    $data['client_id']
+    $client->id
   ), true);
 
 $this->layout = false;
@@ -39,90 +39,39 @@ $this->assign('title', 'Edit Customer');
 
   <h1>Edit customer</h1>
   <?= $this->Flash->render() ?>
-  <form class="form-horizontal" action="<?=$url?>" method="post">
-    <div class="col-sm-12 col-md-3">
-      <h3>Company</h3>
-    </div>
-    <div class="col-sm-12 col-md-9">
-      <div class="form-group">
-        <label for="company_name">company name</label>
-        <input type="text" class="form-control" id="company_name" name="client_name" value="<?=$data['client_name']?>">
-      </div>
-    </div>
-
-    <div class="col-sm-12 col-md-3">
-      <h3>Adress</h3>
-    </div>
-    <div class="col-sm-12 col-md-9">
-      <div class="form-group">
-        <label for="street">street</label>
-        <input type="text" class="form-control" id="street" name="street" value="<?=$data['street']?>">
-      </div>
-    </div>
-    <div class="col-sm-12 col-md-9 col-md-offset-3">
-      <div class="form-group">
-        <label for="street_number">street number</label>
-        <input type="text" class="form-control" id="street_number" name="street_number" value="<?=$data['street_number']?>">
-      </div>
-    </div>
-    <div class="col-sm-12 col-md-9 col-md-offset-3">
-      <div class="form-group">
-        <label for="postal_code">postal code</label>
-        <input type="text" class="form-control" id="postal_code" name="area_code" value="<?=$data['postal_code']?>">
-      </div>
-    </div>
-    <div class="col-sm-12 col-md-9 col-md-offset-3">
-      <div class="form-group">
-        <label for="city">city</label>
-        <input type="text" class="form-control" id="city" name="city" value="<?=$data['city']?>">
-      </div>
-    </div>
-    <div class="col-sm-12 col-md-9 col-md-offset-3">
-      <div class="form-group">
-        <label for="country">country</label>
-        <input type="text" class="form-control" id="country" name="country" value="<?=$data['country']?>">
-      </div>
-    </div>
-    <div class="col-sm-12 col-md-3">
-      <h3>Contact person</h3>
-    </div>
-    <div class="col-sm-12 col-md-9">
-        <div class="form-group">
-          <label for="firstname">first name</label>
-          <input type="text" class="form-control" id="firstname" name="firstname" value="<?=$data['contact_firstname']?>">
-        </div>
-    </div>
-    <div class="col-sm-12 col-md-9 col-md-offset-3">
-        <div class="form-group">
-          <label for="lastname">last name</label>
-          <input type="text" class="form-control" id="lastname" name="lastname" value="<?=$data['contact_lastname']?>">
-        </div>
-    </div>
-    <div class="col-sm-12 col-md-9 col-md-offset-3">
-
-        <div class="form-group">
-          <label for="phone">phone number</label>
-          <input type="text" class="form-control" id="phone" name="phone" value="<?=$data['contact_phone']?>">
-        </div>
-    </div>
-    <div class="col-sm-12 col-md-9 col-md-offset-3">
-        <div class="form-group">
-          <label for="fax">fax number</label>
-          <input type="text" class="form-control" id="fax" name="fax" value="<?=$data['contact_fax']?>">
-        </div>
-    </div>
-    <div class="col-sm-12 col-md-9 col-md-offset-3">
-        <div class="form-group">
-          <label for="email">email</label>
-          <input type="email" class="form-control" id="email" name="email" value="<?=$data['contact_email']?>">
-        </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-12 col-md-2 col-md-offset-10">
-        <input type="submit" class="btn btn-default" id="edit-client-submit" value="Submit">
-      </div>
-    </div>
-  </form>
+  <?php
+    echo $this->Form->create(null,[
+      'horizontal' => true,
+      'cols' => [
+        'sm' => [
+          'label' => 4,
+          'input' => 4,
+          'error' => 4
+        ],
+        'md' => [
+          'label' => 2,
+          'input' => 8,
+          'error' => 2
+        ]
+      ]
+    ]);
+    echo '<h3>Company</h3>';
+    echo $this->Form->input('client_name', ['type' => 'text', 'value' => $client->client_name]);
+    echo '<h3>Adress</h3>';
+    echo $this->Form->input('street', ['type' => 'text', 'value' => $client->street]);
+    echo $this->Form->input('street_number', ['type' => 'text', 'value' => $client->street_number]) ;
+    echo $this->Form->input('area_code', ['type' => 'text', 'value' => $client->area_code]) ;
+    echo $this->Form->input('city', ['type' => 'text', 'value' => $client->city]) ;
+    echo $this->Form->input('country', ['type' => 'text', 'value' => $client->country]) ;
+    echo '<h3>Contact person</h3>';
+    echo $this->Form->input('contact_first_name', ['type' => 'text', 'value' => $client->contact_first_name]);
+    echo $this->Form->input('contact_last_name', ['type' => 'text', 'value' => $client->contact_last_name]);
+    echo $this->Form->input('contact_phone', ['type' => 'text', 'value' => $client->contact_phone]);
+    echo $this->Form->input('contact_fax', ['type' => 'text', 'value' => $client->contact_fax]);
+    echo $this->Form->input('contact_email', ['type' => 'email', 'value' => $client->contact_email]);
+    echo $this->Form->submit('Edit Client');
+    echo $this->Form->end();
+   ?>
 
   <?php
     $this->start('more_js');

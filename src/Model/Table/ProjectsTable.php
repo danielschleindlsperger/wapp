@@ -19,19 +19,21 @@ class ProjectsTable extends Table
             ->notEmpty('project_name', 'A project name is required')
             ->requirePresence('start_date')
             ->notEmpty('start_date', 'A start date is required')
-            ->add('start_date', 'date', [
-                'rule' => ['date', 'dmy'],
-                'message' => 'Start date has to be in a date format',
-            ])
             ->requirePresence('end_date')
             ->notEmpty('end_date', 'An end date is required')
-            ->add('end_date', 'date', [
-                'rule' => ['date', 'dmy'],
-                'message' => 'End date has to be in a date format',
-            ])
             ->requirePresence('internal_cost')
             ->notEmpty('internal_cost', 'Internal cost is required')
             ->requirePresence('contract_amount')
-            ->notEmpty('contract_amount', 'Internal cost is required');
+            ->notEmpty('contract_amount', 'First name is required')
+            ->requirePresence('contact_first_name')
+            ->notEmpty('contact_first_name', 'First name is required')
+            ->requirePresence('contact_last_name')
+            ->notEmpty('contact_last_name', 'Last name is required')
+            ->requirePresence('contact_email')
+            ->notEmpty('contact_email', 'Contact email is required')
+            ->requirePresence('contact_phone')
+            ->notEmpty('contact_phone', 'Contact phone numer is required')
+            ->requirePresence('contact_fax')
+            ->notEmpty('contact_fax', 'Contact fax number is required');
     }
 }
