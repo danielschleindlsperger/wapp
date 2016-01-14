@@ -14,6 +14,7 @@ class ProjectsController extends AppController
 
     $projects = $this->Projects->find('all');
 
+    // Put respective client info to each project
     foreach ($projects as $project){
       $client_id = $project->client_id;
       $project->client = $this->Clients->get($client_id);
@@ -105,7 +106,6 @@ class ProjectsController extends AppController
   {
       $this->request->allowMethod(['post', 'delete']);
       $this->loadModel('Clients');
-      $this->loadModel('Contacts');
 
       $this->autoRender = false;
 

@@ -28,16 +28,4 @@ $this->assign('title', 'Home');
 ?>
 <h1>Dashboard</h1>
 
-
-
-
-
-<?php
-    echo $this->Form->create(null, ['horizontal' => true]);
-    echo $this->Form->input('username', ['type' => 'text']) ;
-    echo $this->Form->input('password', ['type' => 'password']) ;
-    echo $this->Form->input('date', ['type' => 'date']) ;
-    echo $this->Form->input('remember', ['type' => 'checkbox']) ;
-    echo $this->Form->submit('Log In') ;
-    echo $this->Form->end() ;
-?>
+<?php debug($this->Dashboard->getTopClientsByProjectNumber($clients));?>

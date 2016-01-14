@@ -72,4 +72,14 @@ class PagesController extends AppController
       }
       $this->set('clients', $clients);
     }
+
+    public function dashboard(){
+      $this->loadModel('Clients');
+      $this->loadModel('Projects');
+      $clients = $this->Clients->find('all');
+      foreach ($clients as $client){
+      $client->projects = $this->Projects->find()->where(['client_id' => $client->id]);
+      }
+      $this->set('clients', $clients);
+    }
 }
