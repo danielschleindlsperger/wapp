@@ -44,7 +44,11 @@ $this->assign('title', 'Projects');
 <?= $this->Flash->render() ?>
 <div class="list-group">
   <?php foreach ($projects as $project) {
-    echo '<a href="'.$url.'/'.urlencode($project->id).'"'.' class="list-group-item row">'.$project->project_name.'</a>';
+    $names = '<div class="col-xs-12 col-md-5"><span class="project-name">'.$project->project_name.'</span>'.'<span class="client-name">'.$project->client->client_name.'</span></div>';
+    $dates = '<div class="col-xs-6 col-md-3">'.'<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>'.$this->Time->format($project->start_date, 'd.M.Y').' - '. $this->Time->format($project->end_date, 'd.M.Y').'</div>';
+    $profit = '<div class="col-xs-6 col-md-3">'.'<span class="glyphicon glyphicon-tag" aria-hidden="true"></span>'.
+    $this->Number->currency($project->contract_amount - $project->internal_cost, 'EUR').'</div>';
+    echo '<a href="'.$url.'/'.urlencode($project->id).'"'.' class="list-group-item row">'.$names.$dates.$profit.'</a>';
 }
   ?>
 </div>

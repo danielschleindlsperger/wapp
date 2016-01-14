@@ -10,13 +10,20 @@ class ProjectsController extends AppController
     // List projects
   public function index()
   {
-      $this->set('projects', $this->Projects->find('all'));
+    $this->loadModel('Clients');
+
+    $projects = $this->Projects->find('all');
+
+    foreach ($projects as $project){
+      $client_id = $project->client_id;
+      $project->client = $this->Clients->get($client_id);
+    }
+      $this->set('projects', $projects);
   }
 
   // Show details to specific project
   public function showDetails($id = null)
   {
-
       $this->loadModel('Clients');
 
       $project = $this->Projects->get($id);
@@ -25,7 +32,7 @@ class ProjectsController extends AppController
 
       $this->set(['project' => $project, 'client' => $client]);
 
-      // 404 if client doesn't exist
+      // 404 if project doesn't exist
       if (empty($project)) {
           throw new NotFoundException(__('Project not found'));
       }
@@ -34,7 +41,7 @@ class ProjectsController extends AppController
   // Edit project
   public function edit($id = null)
   {
-    
+
     $this->loadModel('Clients');
 
     // POST request
@@ -42,8 +49,7 @@ class ProjectsController extends AppController
         $data = $this->request->data;
 
         $project = $this->Projects->get($id);
-        $project = $this->Projects->patchEntity($project, $project_data);
-        //$project->client_id = $client_id;
+        $project = $this->Projects->patchEntity($project, $data);
 
         if ($this->Projects->save($project)) {
             $this->Flash->success('The project has been edited successfully.');
@@ -77,7 +83,6 @@ class ProjectsController extends AppController
 
           $client = $this->Clients->find()->where(['client_name' => $data['client_name']])->first();
 
-          debug($client);
           $data['client_id'] = $client->id;
 
           $project = $this->Projects->patchEntity($project, $data);

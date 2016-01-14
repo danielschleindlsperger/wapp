@@ -72,7 +72,7 @@ foreach($clients as $client){
   echo '<h3>Company</h3>';
   echo $this->Form->input('client_name', ['type' => 'select', 'options' => $client_name_options, 'default' => $client_name_default]);
   echo '<h3>Project</h3>';
-  echo $this->Form->input('project_name', ['type' => 'text']);
+  echo $this->Form->input('project_name', ['type' => 'text', 'value' => $project->project_name]);
   echo $this->Form->input('status', ['type' => 'select', 'options' => [
     'planned' => 'planned', 'began' => 'began', 'stopped' => 'stopped', 'cancelled' => 'cancelled' , 'completed' => 'completed'
   ], 'default' => $project->status]);
@@ -88,6 +88,6 @@ foreach($clients as $client){
   echo $this->Form->input('contact_phone', ['type' => 'text', 'value' => $project->contact_phone]);
   echo $this->Form->input('contact_fax', ['type' => 'text', 'value' => $project->contact_fax]);
   echo $this->Form->input('contact_email', ['type' => 'email', 'value' => $project->contact_email]);
-  echo $this->Form->submit('Create Project');
+  echo $this->Form->submit('Edit Project');
   echo $this->Form->end();
  ?>
