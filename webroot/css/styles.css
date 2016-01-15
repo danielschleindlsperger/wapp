@@ -137,7 +137,7 @@ a, a:hover, a:active {
     padding-right: 1rem;
 }
 .project-name {
+    font-family: Oswald, Arial, sans-serif;
     padding-right: 2rem;
-    font-weight: bold;
-    font-size: 2rem;
+    font-size: 1.8rem;
 }
