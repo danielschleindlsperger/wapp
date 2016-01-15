@@ -5,6 +5,31 @@ html, body {
     padding: 0;
 }
 
+/* Headings */
+
+h1 {
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+}
+h3 {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+h1, h2, h3, h4 {
+    font-family: Oswald, Arial, sans-serif;
+}
+
+/* Links */
+
+a, a:hover, a:active {
+    color: tomato;
+    text-decoration: none;
+}
+.vertical-text-center {
+    height: 6rem;
+    line-height: 6rem;
+}
+
 /* Navbar */
 
 .navbar-default {
@@ -29,6 +54,16 @@ html, body {
 }
 .content {
     margin-top: 50px;
+}
+.navbar-brand {
+    padding: 0px;
+    /* firefox bug fix */
+}
+.navbar-brand>img {
+    height: 100%;
+    padding: 15px;
+    /* firefox bug fix */
+    width: auto;
 }
 
 /* Input glow */
@@ -105,29 +140,4 @@ html, body {
     padding-right: 2rem;
     font-weight: bold;
     font-size: 2rem;
-}
-
-/* Headings */
-
-h1 {
-    margin-top: 4rem;
-    margin-bottom: 4rem;
-}
-h3 {
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-}
-h1, h2, h3, h4 {
-    font-family: Oswald, Arial, sans-serif;
-}
-
-/* Links */
-
-a, a:hover, a:active {
-    color: tomato;
-    text-decoration: none;
-}
-.vertical-text-center {
-    height: 6rem;
-    line-height: 6rem;
 }

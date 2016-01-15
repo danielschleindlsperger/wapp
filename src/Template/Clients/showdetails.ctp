@@ -106,7 +106,7 @@ $this->assign('title', $client->client_name);
       echo '<a href="'.Router::url(array('controller' => 'projects', 'action' => 'showdetails', $project->id), true).'"'.' class="list-group-item row">'.
       $names.$dates.$profit.
       '</a>';
-}
+    }   
     ?>
   </div>
 </div>

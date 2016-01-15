@@ -34,7 +34,7 @@ $this->assign('title', 'Projects');
   <div class="create-button">
     <a class="btn btn-default" href="<?=Router::url(array(
         'controller' => 'projects',
-        'action' => 'create',
+        'action' => 'create'
       )); ?>">
       <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
       Add Project

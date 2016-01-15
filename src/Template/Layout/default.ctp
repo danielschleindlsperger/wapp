@@ -40,6 +40,7 @@ $url = $this->request->here;
         <?= $cakeDescription ?>:
         <?= $this->fetch('title') ?>
     </title>
+    <?= $this->Html->meta ( 'favicon.ico', '/favicon.ico', array ('type' => 'icon') ); ?>
     <?= $this->Html->meta('icon') ?>
 
     <?= $this->Html->css('normalize.css') ?>
@@ -68,7 +69,7 @@ $url = $this->request->here;
           <span class="icon-bar"></span>
         </button>
         <a class="navbar-brand" href="#">
-          <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+          <?= $this->Html->image('logo_hirez.png', ['alt' => 'Brand']); ?>
         </a>
       </div>
 
