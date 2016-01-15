@@ -99,8 +99,13 @@ $this->assign('title', $client->client_name);
   <h2>Projects</h2>
   <div class="list-group">
     <?php foreach ($client->projects as $project) {
-    echo '<a href="'.Router::url(array('controller' => 'projects', 'action' => 'showdetails', $project->id), true).'"'.' class="list-group-item" ><span class="project-list-title">'.
-      $project->project_name.'</span>&nbsp;Start: '.$this->Time->format($project->start_date, 'd.M.Y').'&nbsp;End: '.$this->Time->format($project->end_date, 'd.M.Y').'&nbsp;Contract amount: '.$this->Number->currency($project['contract_amount'], 'EUR').'</a>';
+      $names = '<div class="col-xs-12 col-md-5"><span class="project-name">'.$project->project_name.'</span></div>';
+      $dates = '<div class="col-xs-6 col-md-3">'.'<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>'.$this->Time->format($project->start_date, 'd.M.Y').' - '. $this->Time->format($project->end_date, 'd.M.Y').'</div>';
+      $profit = '<div class="col-xs-6 col-md-3">'.'<span class="glyphicon glyphicon-tag" aria-hidden="true"></span>'.
+      $this->Number->currency($project->contract_amount - $project->internal_cost, 'EUR').'</div>';
+      echo '<a href="'.Router::url(array('controller' => 'projects', 'action' => 'showdetails', $project->id), true).'"'.' class="list-group-item row">'.
+      $names.$dates.$profit.
+      '</a>';
 }
     ?>
   </div>
