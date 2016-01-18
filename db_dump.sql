@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 14, 2016 at 10:47 PM
+-- Generation Time: Jan 18, 2016 at 01:57 PM
 -- Server version: 5.6.26
 -- PHP Version: 5.6.12
 
@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `alderaan`
 --
+CREATE DATABASE IF NOT EXISTS `alderaan` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `alderaan`;
 
 -- --------------------------------------------------------
 
@@ -26,6 +28,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `clients`
 --
 
+DROP TABLE IF EXISTS `clients`;
 CREATE TABLE IF NOT EXISTS `clients` (
   `id` int(12) unsigned NOT NULL,
   `client_name` varchar(100) NOT NULL,
@@ -39,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `clients` (
   `contact_email` varchar(100) NOT NULL,
   `contact_phone` varchar(50) NOT NULL,
   `contact_fax` varchar(50) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `clients`
@@ -58,6 +61,7 @@ INSERT INTO `clients` (`id`, `client_name`, `street`, `street_number`, `area_cod
 -- Table structure for table `projects`
 --
 
+DROP TABLE IF EXISTS `projects`;
 CREATE TABLE IF NOT EXISTS `projects` (
   `id` int(12) unsigned NOT NULL,
   `client_id` int(12) unsigned NOT NULL,
@@ -110,7 +114,7 @@ ALTER TABLE `projects`
 -- AUTO_INCREMENT for table `clients`
 --
 ALTER TABLE `clients`
-  MODIFY `id` int(12) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
+  MODIFY `id` int(12) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `projects`
 --
