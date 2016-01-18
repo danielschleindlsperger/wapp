@@ -6,6 +6,8 @@ use Cake\View\Helper;
 
 class DashboardHelper extends Helper
 {
+
+  // Get top clients based on number of projects
   public function getTopClientsByProjectNumber($clients){
     $orderedClients = [];
     foreach ($clients as $client){
@@ -41,6 +43,7 @@ class DashboardHelper extends Helper
     }
   }
 
+  // Get top clients by sales revenue
   public function getTopClientsBySales($clients){
     $orderedClients = [];
     foreach ($clients as $client){
@@ -77,6 +80,7 @@ class DashboardHelper extends Helper
     }
   }
 
+  // Get top projects that are currently running
   public function getTopRunningProjects($projects){
     $orderedProjects = array();
     foreach ($projects as $project){
@@ -107,6 +111,7 @@ class DashboardHelper extends Helper
     }
   }
 
+  // Get top projects that are currently stopped
   public function getTopStoppedProjects($projects){
     $orderedProjects = array();
     foreach ($projects as $project){
@@ -137,6 +142,7 @@ class DashboardHelper extends Helper
     }
   }
 
+  // Get top projects that are currently planned
   public function getTopPlannedProjects($projects){
     $orderedProjects = array();
     foreach ($projects as $project){

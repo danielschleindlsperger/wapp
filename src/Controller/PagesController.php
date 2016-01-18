@@ -63,24 +63,32 @@ class PagesController extends AppController
         }
     }
 
+    // Show map with information of all clients
     public function map(){
       $this->loadModel('Clients');
       $this->loadModel('Projects');
+
       $clients = $this->Clients->find('all');
+
       foreach ($clients as $client){
       $client->projects = $this->Projects->find()->where(['client_id' => $client->id]);
       }
       $this->set('clients', $clients);
     }
 
+    // Show dashboard with information about clients and projects
     public function dashboard(){
       $this->loadModel('Clients');
       $this->loadModel('Projects');
+
       $clients = $this->Clients->find('all');
+
       foreach ($clients as $client){
         $client->projects = $this->Projects->find()->where(['client_id' => $client->id]);
       }
+      
       $projects = $this->Projects->find('all');
+
       $this->set(['clients' => $clients, 'projects' => $projects]);
     }
 }

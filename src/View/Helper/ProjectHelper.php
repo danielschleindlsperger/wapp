@@ -6,6 +6,8 @@ use Cake\View\Helper;
 
 class ProjectHelper extends Helper
 {
+
+    // Get google maps marker color of client based on number of different project statuses
     public function getColor($projects)
     {
         $statuses = self::getProjectsByStatus($projects);
@@ -28,6 +30,8 @@ class ProjectHelper extends Helper
             return 'gray';
         }
     }
+
+    // Return number of projects sorted by status
     public function getProjectsByStatus($projects)
     {
         $stopped = 0;

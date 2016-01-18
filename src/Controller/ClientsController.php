@@ -15,12 +15,13 @@ class ClientsController extends AppController
     {
         parent::initialize();
 
-        $this->loadComponent('Flash'); // Include the FlashComponent
+        // Include components
+        $this->loadComponent('Flash');
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Paginator');
     }
 
-  // List clients
+  // List all clients
   public function index()
   {
       $this->loadModel('Projects');
@@ -46,6 +47,7 @@ class ClientsController extends AppController
           throw new NotFoundException(__('Client not found'));
       }
 
+      // Get projects for each client
       $projects = $this->Projects->find()->where(['client_id' => $id]);
 
       $client->projects = $projects;
@@ -70,10 +72,9 @@ class ClientsController extends AppController
               return $this->redirect(['action' => 'index']);
           }
 
-          $errors = $contact->errors();
-
           $this->Flash->error('Unable to edit contact.');
       }
+
 
       // GET request
 
@@ -103,8 +104,8 @@ class ClientsController extends AppController
 
               return $this->redirect(['action' => 'index']);
           }
-          $errors = $client->errors();
-          $this->Flash->error(__('Unable to add customer.'));
+
+          $this->Flash->error('Unable to add customer');
       }
   }
 
@@ -123,6 +124,7 @@ class ClientsController extends AppController
 
           return $this->redirect(['action' => 'index']);
       }
-      $this->Flash->error(__('Unable to delete customer.'));
+      
+      $this->Flash->error('Unable to delete customer.');
   }
 }

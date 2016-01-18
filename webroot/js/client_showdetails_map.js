@@ -2,7 +2,7 @@ var map;
 var info_window;
 var marker;
 
-// Google maps callback function to init map
+// Google maps callback function to initialize map
 function initMap() {
 	var geocoder = new google.maps.Geocoder();
 	var address = getAddressFromClient(client_data);
@@ -19,6 +19,8 @@ function initMap() {
 			alert("Geocode was not successful for the following reason: " + status);
 		}
 	});
+
+	// Set temporary info window
 	info_window = new google.maps.InfoWindow({
 		content: 'loading'
 	});
@@ -34,7 +36,7 @@ function setMarker(resultsMap, client, position) {
 		client.area_code + ' ' +
 		client.city + '<br>'
 
-    // Set marker and add onclick listener to open infowindow
+	// Set marker and add onclick listener to open infowindow
 	marker = new google.maps.Marker({
 		map: resultsMap,
 		position: position,
@@ -46,6 +48,7 @@ function setMarker(resultsMap, client, position) {
 	});
 }
 
+// Get address string from client object
 function getAddressFromClient(client) {
 	return client.client_name + ' ' + client.street + ' ' + client.street_number + ' ' + client.area_code + ' ' + client.city;
 }

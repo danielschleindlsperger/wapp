@@ -61,24 +61,24 @@ $this->assign('title', 'Create Project');
       ]
     ]);
     echo '<h3>Company</h3>';
-    echo $this->Form->input('client_name', ['type' => 'select', 'options' => $client_name_options]);
+    echo $this->Form->input('client_name', ['type' => 'select', 'options' => $client_name_options, 'required' => 'required']);
     echo '<h3>Project</h3>';
-    echo $this->Form->input('project_name', ['type' => 'text']);
+    echo $this->Form->input('project_name', ['type' => 'text', 'required' => 'required']);
     echo $this->Form->input('status', ['type' => 'select', 'options' => [
       'planned' => 'planned', 'began' => 'began', 'stopped' => 'stopped', 'cancelled' => 'cancelled' , 'completed' => 'completed'
       ]]);
     echo '<h3>Dates</h3>';
-    echo $this->Form->input('start_date', ['type' => 'date']);
-    echo $this->Form->input('end_date', ['type' => 'date']);
+    echo $this->Form->input('start_date', ['type' => 'date', 'required' => 'required']);
+    echo $this->Form->input('end_date', ['type' => 'date', 'required' => 'required']);
     echo '<h3>Accounting</h3>';
-    echo $this->Form->input('contract_amount', ['type' => 'number', 'step' => 0.01]);
-    echo $this->Form->input('internal_cost', ['type' => 'number', 'step' => 0.01]);
+    echo $this->Form->input('contract_amount', ['type' => 'number', 'step' => 0.01, 'required' => 'required']);
+    echo $this->Form->input('internal_cost', ['type' => 'number', 'step' => 0.01, 'required' => 'required']);
     echo '<h3>Contact person</h3>';
-    echo $this->Form->input('contact_first_name', ['type' => 'text']);
-    echo $this->Form->input('contact_last_name', ['type' => 'text']);
-    echo $this->Form->input('contact_phone', ['type' => 'text']);
-    echo $this->Form->input('contact_fax', ['type' => 'text']);
-    echo $this->Form->input('contact_email', ['type' => 'email']);
+    echo $this->Form->input('contact_first_name', ['type' => 'text', 'required' => 'required']);
+    echo $this->Form->input('contact_last_name', ['type' => 'text', 'required' => 'required']);
+    echo $this->Form->input('contact_phone', ['type' => 'text', 'required' => 'required']);
+    echo $this->Form->input('contact_fax', ['type' => 'text', 'required' => 'required']);
+    echo $this->Form->input('contact_email', ['type' => 'email', 'required' => 'required']);
     echo $this->Form->submit('Create Project');
     echo $this->Form->end();
    ?>

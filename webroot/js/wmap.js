@@ -12,15 +12,20 @@ function initMap() {
 		},
 		zoom: 3
 	});
+
+
 	for (var i = 0; i < client_data.length; i++) {
 		var color = setColor(client_data[i].client_icon_color);
 		geocodeAddress(geocoder, map, client_data[i], i, color);
 	}
+
+	// Temporary info window
 	info_window = new google.maps.InfoWindow({
 		content: 'loading'
 	});
 }
 
+// Set Marker for each client on location based on geocoder result
 function geocodeAddress(geocoder, resultsMap, client, index, color) {
 	var address = client.client_name + ' ' + client.street + ' ' + client.street_number + ' ' + client.area_code + ' ' + client.city;
 	var infoContent = '<h4>' +
@@ -32,7 +37,7 @@ function geocodeAddress(geocoder, resultsMap, client, index, color) {
 		client.city + '<br>' +
 		'<a href="' + client.client_link + '">' +
 		'Click here for all the details!</a>';
-	console.log(address);
+
 	geocoder.geocode({
 		'address': address
 	}, function (results, status) {
@@ -58,6 +63,7 @@ function geocodeAddress(geocoder, resultsMap, client, index, color) {
 	});
 }
 
+// Get correct Marker based on suppplied color
 function setColor(color) {
 	return 'img/map_icon_' + color + '.png';
 }

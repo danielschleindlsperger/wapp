@@ -70,24 +70,24 @@ foreach($clients as $client){
     ]
   ]);
   echo '<h3>Company</h3>';
-  echo $this->Form->input('client_name', ['type' => 'select', 'options' => $client_name_options, 'default' => $client_name_default]);
+  echo $this->Form->input('client_name', ['type' => 'select', 'options' => $client_name_options, 'default' => $client_name_default, 'required' => 'required']);
   echo '<h3>Project</h3>';
-  echo $this->Form->input('project_name', ['type' => 'text', 'value' => $project->project_name]);
+  echo $this->Form->input('project_name', ['type' => 'text', 'value' => $project->project_name, 'required' => 'required']);
   echo $this->Form->input('status', ['type' => 'select', 'options' => [
     'planned' => 'planned', 'began' => 'began', 'stopped' => 'stopped', 'cancelled' => 'cancelled' , 'completed' => 'completed'
   ], 'default' => $project->status]);
   echo '<h3>Dates</h3>';
-  echo $this->Form->input('start_date', ['type' => 'date', 'value' => $this->Time->format($project->start_date, 'YYYY-MM-dd')]);
-  echo $this->Form->input('end_date', ['type' => 'date', 'value' => $this->Time->format($project->end_date, 'YYYY-MM-dd')]);
+  echo $this->Form->input('start_date', ['type' => 'date', 'value' => $this->Time->format($project->start_date, 'YYYY-MM-dd'), 'required' => 'required']);
+  echo $this->Form->input('end_date', ['type' => 'date', 'value' => $this->Time->format($project->end_date, 'YYYY-MM-dd'), 'required' => 'required']);
   echo '<h3>Accounting</h3>';
-  echo $this->Form->input('contract_amount', ['type' => 'number', 'step' => 0.01, 'value' => $project->contract_amount]);
-  echo $this->Form->input('internal_cost', ['type' => 'number', 'step' => 0.01, 'value' => $project->internal_cost]);
+  echo $this->Form->input('contract_amount', ['type' => 'number', 'step' => 0.01, 'value' => $project->contract_amount, 'required' => 'required']);
+  echo $this->Form->input('internal_cost', ['type' => 'number', 'step' => 0.01, 'value' => $project->internal_cost, 'required' => 'required']);
   echo '<h3>Contact person</h3>';
-  echo $this->Form->input('contact_first_name', ['type' => 'text', 'value' => $project->contact_first_name]);
-  echo $this->Form->input('contact_last_name', ['type' => 'text', 'value' => $project->contact_last_name]);
-  echo $this->Form->input('contact_phone', ['type' => 'text', 'value' => $project->contact_phone]);
-  echo $this->Form->input('contact_fax', ['type' => 'text', 'value' => $project->contact_fax]);
-  echo $this->Form->input('contact_email', ['type' => 'email', 'value' => $project->contact_email]);
+  echo $this->Form->input('contact_first_name', ['type' => 'text', 'value' => $project->contact_first_name, 'required' => 'required']);
+  echo $this->Form->input('contact_last_name', ['type' => 'text', 'value' => $project->contact_last_name, 'required' => 'required']);
+  echo $this->Form->input('contact_phone', ['type' => 'text', 'value' => $project->contact_phone, 'required' => 'required']);
+  echo $this->Form->input('contact_fax', ['type' => 'text', 'value' => $project->contact_fax, 'required' => 'required']);
+  echo $this->Form->input('contact_email', ['type' => 'email', 'value' => $project->contact_email, 'required' => 'required']);
   echo $this->Form->submit('Edit Project');
   echo $this->Form->end();
  ?>

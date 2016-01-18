@@ -94,7 +94,7 @@ class ProjectsController extends AppController
               return $this->redirect(['action' => 'index']);
           }
 
-          $this->Flash->error(__('Unable to add project.'));
+          $this->Flash->error('Unable to add project.');
       }
 
       // GET request
